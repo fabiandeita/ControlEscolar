@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      template="/resources/templates/content-template.xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      
+    <h:head>
+        <title>Tabla</title>
+    </h:head>
+    <h:body><h1 align="center">Tabla</h1>
+        <!--br/>
+        <h:link outcome="welcomeIcefaces" value="ICEfaces welcome page #{pruebaComponent.message} " /  -->
+        <h:form style="color: blue; align-content: center"><br/><br/>
+            <ace:linkButton id="link2" value="Clic Alumno (listar) " action="#{pruebaComponent.fillListaAlumnos}" style="color: green"></ace:linkButton><br/><br/>
+            <ace:linkButton id="link3" value="Clic xlsx (listar) " action="#{pruebaComponent.leerArchivosDeExcel}" style="color: blue"></ace:linkButton><br/><br/>
+            <!--ace:linkButton id="link3" value="Clic Maestro (listar) " action="#{pruebaComponent.clicMaestro}" style="color: blue"></ace:linkButton><br/><br/-->
+            <!-- ace:dataTable -->   
+        </h:form>
+        <h:form id="form">
+            <style type="text/css">
+                /* Important required because row */
+                .ui-datatable-odd {
+                    background-color:lightgray !important;
+                    background-position-y: -1400px; /* IE7 hack */
+                }
+                .button {
+                        background-color: #13AFDF; 
+                        border-radius: 6px;
+                        border: none;
+                        color: #fff;
+                        cursor: pointer;
+                        font-size: 12px;
+                        padding: 5px 5px;
+                        text-align: center;
+                        text-transform: uppercase;
+                        height: 25px;
+                }   
+                .button:hover {
+                    background-color: #FB7E29;
+                    color: #fff; 
+                }
+
+            </style>
+          <ace:panel id="panel">
+           <ace:dataTable id="controlTable"
+                          value="#{pruebaComponent.listaAlumnos}"
+                          var="_alumno"
+                          paginator="true"
+                          paginatorPosition="bottom"
+                          rows="7">
+                
+               <ace:column id="alumno_id" headerText="ID" sortBy="" filterBy="" filterMatchMode="contains">
+                   <h:outputText id="idOut" value="#{_alumno.estudianteId}"/>
+               </ace:column>
+                         
+               <ace:column id="nombre" headerText="NOMBRE" sortBy="" filterBy="" filterMatchMode="contains">
+                    <h:inputText id="nombreOut" value="#{_alumno.nombre}"/>
+               </ace:column>
+               
+               <ace:column id="apellidoP" headerText="APELLIDO PATERNO" sortBy="" filterBy="" filterMatchMode="contains">
+                    <h:inputText id="apellidoPOut" value="#{_alumno.apellidoP}"/>
+               </ace:column>
+               
+               <ace:column id="apellidoM" headerText="APELLIDO MATERNO" sortBy="" filterBy="" filterMatchMode="contains">
+                    <h:inputText id="apellidoMOut" value="#{_alumno.apellidoM}"/>
+               </ace:column>
+                    
+               <ace:column id="acciones" headerText="ACCIONES" sortBy="" filterBy="" filterMatchMode="contains">     
+                   <h:commandButton value="Borrar" image="resources/images/delete2.png" style="color: red;" actionListener="#{pruebaComponent.deleteEstudiante}"  class="button ">
+                       <f:attribute name="alumno" value="#{_alumno}" />
+                   </h:commandButton>
+                   <h:commandButton value="Actual" image="resources/images/update3.png"  style="color: blue;" actionListener="#{pruebaComponent.updateEstudiante}" class="button">
+                       <f:attribute name="alumno" value="#{_alumno}" />
+                   </h:commandButton>
+               </ace:column>
+               
+            </ace:dataTable>
+          </ace:panel>
+            
+            
+             <ace:panel id="personalInfoInputPanel" header="Personal Info" styleClass="required-styling-demo">
+                <h:panelGrid id="inputGrid" columns="1" width="100%" styleClass="textEntryInputTable">
+                    <ace:textEntry id="firstNameInput" value="#{pruebaComponent.alumnoTemp.nombre}" label="Nombre" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this firstNameOutput firstNameMsg" event="blur"/>
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="lastNamePatherInput" value="#{pruebaComponent.alumnoTemp.apellidoP}" label="Apellido Paterno" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/>
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="lastMatherNameInput" value="#{pruebaComponent.alumnoTemp.apellidoM}" label="Apellido Materno" labelPosition="left" required="true" requiredIndicator="(*)" indicatorPosition="right">
+                        <ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/>
+                    </ace:textEntry>
+
+                <h:commandButton value="Agregar"  style="color: yellow;" actionListener="#{pruebaComponent.addEstudiante}" class="button">
+                    <f:attribute name="alumnoTemp" value="#{pruebaComponent.alumnoTemp}" />
+                </h:commandButton>
+
+                </h:panelGrid>
+                <h:panelGrid width="100%">
+                    <ace:message id="firstNameMsg" for="firstNameInput"/>
+                    <ace:message id="lastNameMsg" for="lastNamePatherInput"/>
+                    <ace:message id="address1Msg" for="lastMatherNameInput"/>
+                </h:panelGrid>
+            </ace:panel>
+            
+            <ace:panel id="personalInfoOutputPanel" header="Entered data" rendered="false">
+                <h:panelGrid id="outputGrid" width="100%" style="text-align: left;">
+                    <h:outputText id="firstNameOutput" value="first name: #{pruebaComponent.alumnoTemp.nombre}"/>
+                    <h:outputText id="lastNamePatherOutput" value="last name: #{pruebaComponent.alumnoTemp.apellidoP}"/>
+                    <h:outputText id="lastNameMatherOutput" value="last name: #{pruebaComponent.alumnoTemp.apellidoM}"/>
+                    
+                </h:panelGrid>
+            </ace:panel>
+        </h:form>
+        
+        
+    </h:body>
+</html>
+

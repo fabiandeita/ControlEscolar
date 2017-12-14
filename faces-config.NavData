@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="welcomeIcefaces.xhtml" x="281" y="142" zoom="true"/>
+        <Node id="index.xhtml" x="288" y="282" zoom="true"/>
+        <Node id="index.jsp" x="287" y="415" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>
