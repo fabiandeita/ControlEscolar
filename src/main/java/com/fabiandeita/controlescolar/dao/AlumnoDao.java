@@ -24,6 +24,7 @@ public class AlumnoDao {
                 session.beginTransaction();                
                 session.save(alumno); 
                 session.getTransaction().commit();
+//                session.close();
     }
     
     public void updateAlumno(Alumno  alumno){

@@ -86,21 +86,14 @@ public class PruebaControlador {
     }
     
     public void updateEstudiante(ActionEvent event){
-        
         alumno = (Alumno)event.getComponent().getAttributes().get("alumno");
-        
-        
+                
         System.out.println("nombre: " + alumno.getEstudianteId());
         System.out.println("nombre: " + alumno.getNombre());
         System.out.println("nombre: " + alumno.getApellidoM());
         System.out.println("nombre: " + alumno.getApellidoP());
 //        alumno = new Alumno(7, "Carlotta", "Casiragi", "Pompelin");               
         alumnoDao.updateAlumno(alumno);
-        
-        System.out.println("nombre: " + alumno.getEstudianteId());
-        System.out.println("nombre: " + alumno.getNombre());
-        System.out.println("nombre: " + alumno.getApellidoM());
-        System.out.println("nombre: " + alumno.getApellidoP());
     }
     
     public void deleteEstudiante(ActionEvent event){
@@ -157,7 +150,10 @@ public class PruebaControlador {
             XSSFSheet hssfSheet = workbook.getSheetAt(0);
             
             Iterator rowIterator = hssfSheet.rowIterator();
+            
+            int contadorRow = 0;
             while(rowIterator.hasNext()){
+                
                 
                 XSSFRow hssRow = (XSSFRow) rowIterator.next();
                 Iterator iterator = hssRow.cellIterator();
@@ -172,19 +168,55 @@ public class PruebaControlador {
         }catch (Exception e){
             e.printStackTrace();
         }
+        System.out.println("antes del obtener");
+        
         obtener(cellData);
+        
+        System.out.println("después del obtener");
     }
     
     private void obtener(List cellDataList){
-        for(int i = 0; i < cellDataList.size(); i++){
+        System.out.println("cambio 4 ");
+        String nombre = " ";
+        float  promedio = 0;
+        List nombreAlumnos   = new ArrayList();
+        List promedioAlumnos = new ArrayList();
+        
+        for(int i = 6; i < cellDataList.size(); i++){
             List cellTempList = (List) cellDataList.get(i);
-            for(int j = 0; j < cellTempList.size(); j++){
-                XSSFCell hssfCell = (XSSFCell) cellTempList.get(j);
-                String stringCellValue = hssfCell.toString();
-                System.out.println(stringCellValue + " ");
+            
+            for(int j = 0; j < cellTempList.size(); j++){        
+                if(j == 1 || j==2 || j==3 || j==4 || j==5 || j==7 || j==8 || j==9){
+                    
+                    XSSFCell hssfCell = (XSSFCell) cellTempList.get(j);
+                    String stringCellValue = hssfCell.toString();  
+//                  System.out.println(stringCellValue + " ");
+                    if(j == 1){
+                        nombre = stringCellValue;
+                    }
+                    if(j==2||j==3||j==4||j==5||j==7||j==8||j==9){
+                        promedio += Float.parseFloat(stringCellValue);
+                    }
+                }
             }
+            System.out.println("nombre: " + nombre + " promedio: " + promedio/2);
+            
+            String [] arrayString = nombre.split(" ");
+            String apellidoPaterno = arrayString[0];
+            String apellidoMaterno = arrayString[1];
+            String nombreAlumno    = arrayString[2];
+            
+            System.out.println(" " + apellidoPaterno +" " + apellidoMaterno +" " +  nombreAlumno);
+            Alumno alumno = new Alumno();
+            alumno.setNombre(nombreAlumno);
+            alumno.setApellidoP(apellidoPaterno);
+            alumno.setApellidoM(apellidoMaterno);
+            alumnoDao.addAlumno(alumno);
+            
+            promedio = 0;
             System.out.println("");        
         }
+        fillListaAlumnos();
     }
     
 }
