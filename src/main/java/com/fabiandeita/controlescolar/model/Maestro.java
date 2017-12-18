@@ -19,6 +19,7 @@ public class Maestro {
     
     @Id
     @Column(name="maestro_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maestro_id;
     
     @Column(name="nombre")
@@ -32,6 +33,12 @@ public class Maestro {
 
     public Maestro(Long maestroId, String nombre, String apellidoP, String apellidoM) {
         this.maestro_id = maestroId;
+        this.nombre     = nombre;
+        this.apellidoP  = apellidoP;
+        this.apellidoM  = apellidoM;
+    }
+
+    public Maestro( String nombre, String apellidoP, String apellidoM) {
         this.nombre     = nombre;
         this.apellidoP  = apellidoP;
         this.apellidoM  = apellidoM;

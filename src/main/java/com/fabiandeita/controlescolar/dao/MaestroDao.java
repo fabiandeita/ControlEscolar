@@ -11,30 +11,29 @@ import org.hibernate.Session;
  *
  * @author ecastrmu
  */
-public class MaestroDao {
+public class MaestroDao { 
     private Maestro maestro;
     private String message;
     
     public MaestroDao(){
-        message = "Hello mundo";
-        
+        message = "Hello mundo";        
     }
     
     public void addMaestro(Maestro maestro){
         System.out.println("Adicionar------Maestro");
+//        maestro.setMaestro_id(11l);
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        maestro = new Maestro(11l, "Ruben","Castro","M.");
         session.save(maestro); 
         session.getTransaction().commit(); 
-        //init();
+       
     }
-    
+
     public void updateMaestro(Maestro maestro){
         System.out.println("update------Maestro");
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        maestro = new Maestro(11l,"Emma","C.","M.");
+//        maestro = new Maestro(11l,"Emma","C.","M.");
         session.update(maestro); 
         session.getTransaction().commit(); 
     }
@@ -43,7 +42,6 @@ public class MaestroDao {
         System.out.println("delete------Maestro");
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-//      maestro = new Maestro(11);
         session.delete(maestro); 
         session.getTransaction().commit();
     }
@@ -55,13 +53,12 @@ public class MaestroDao {
     }
     
     private synchronized void init(){ 
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        List studentResult = session.createQuery("select m.maestro_Id from " +
-                "maestro as m").list();        
-        session.getTransaction().commit(); 
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        session.beginTransaction();
+//        List studentResult = session.createQuery("select m.maestro_Id from " +
+//                "maestro as m").list();        
+//        session.getTransaction().commit(); 
     }
-
     
     public String getMessage() {
         return message;

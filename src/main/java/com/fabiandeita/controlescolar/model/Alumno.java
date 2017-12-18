@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Alumno {
     @Id
     @Column(name="alumno_id")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long estudianteId;
     
     @Column(name="nombre")

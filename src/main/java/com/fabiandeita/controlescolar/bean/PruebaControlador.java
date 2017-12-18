@@ -13,9 +13,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.faces.event.ActionEvent;
-
 import java.util.List;
-import javax.faces.view.facelets.FaceletContext;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -31,69 +29,39 @@ public class PruebaControlador {
     private AlumnoDao  alumnoDao;
     private MaestroDao maestroDao;
     private List       listaAlumnos;
-    private List       listaAlumnosVacia;
     private List       listaMaestros;
     private Alumno     alumno;
     private Alumno     alumnoTemp;
+    private Maestro    maestro;
+    private Maestro    maestroTemp;
 
-    public Alumno getAlumnoTemp() {
-        return alumnoTemp;
-    }
-
-    public void setAlumnoTemp(Alumno alumnoTemp) {
-        this.alumnoTemp = alumnoTemp;
-    }
-
-    
-    public List getListaAlumnosVacia() {
-        return listaAlumnosVacia;
-    }
-
-    public void setListaAlumnosVacia(List listaAlumnosVacia) {
-        this.listaAlumnosVacia = listaAlumnosVacia;
-    }
-    
-    public List getListaMaestros() {
-        return listaMaestros;
-    }
-    public void setListaMaestros(List listaMaestros) {
-        this.listaMaestros = listaMaestros;
-    }
-    
-    public List getListaAlumnos() {
-        return listaAlumnos;
-    }
-    public void setListaAlumnos(List listaAlumnos) {
-        this.listaAlumnos = listaAlumnos;
-    }
     
     public PruebaControlador(){
         message     = "Hello mundo";
         alumnoDao   = new AlumnoDao();
         maestroDao  = new MaestroDao();
-        alumnoTemp = new Alumno();
+        alumnoTemp  = new Alumno();
+        maestroTemp = new Maestro();
     }
     
     public void addEstudiante(ActionEvent event){
-        
-        System.out.println("nombre: " + alumnoTemp.getNombre());
-        System.out.println("nombre: " + alumnoTemp.getApellidoM());
-        System.out.println("nombre: " + alumnoTemp.getApellidoP());
-        //alumno.setEstudianteId(null);
         alumnoDao.addAlumno(alumnoTemp);
         fillListaAlumnos();
-
+    }
+    
+    public void addMaestro(ActionEvent event){
+        maestroDao.addMaestro(maestroTemp);
+        fillListaMaestros();
     }
     
     public void updateEstudiante(ActionEvent event){
         alumno = (Alumno)event.getComponent().getAttributes().get("alumno");
-                
-        System.out.println("nombre: " + alumno.getEstudianteId());
-        System.out.println("nombre: " + alumno.getNombre());
-        System.out.println("nombre: " + alumno.getApellidoM());
-        System.out.println("nombre: " + alumno.getApellidoP());
-//        alumno = new Alumno(7, "Carlotta", "Casiragi", "Pompelin");               
         alumnoDao.updateAlumno(alumno);
+    }
+    
+    public void updateMaestro(ActionEvent event){
+        maestro = (Maestro)event.getComponent().getAttributes().get("maestro");
+        maestroDao.updateMaestro(maestro);
     }
     
     public void deleteEstudiante(ActionEvent event){
@@ -102,8 +70,18 @@ public class PruebaControlador {
         fillListaAlumnos();
     }
     
+    public void deleteMaestro(ActionEvent event){
+        Maestro maestro = (Maestro)event.getComponent().getAttributes().get("maestro");
+        maestroDao.deleteMaestro(maestro); 
+        fillListaAlumnos();
+    }
+    
     public void fillListaAlumnos(){
         listaAlumnos = alumnoDao.consultaAlumno();
+    }
+    
+    public void fillListaMaestros(){
+        listaMaestros = maestroDao.consultaMaestro();
     }
     
     public void clicMaestro(){
@@ -119,19 +97,6 @@ public class PruebaControlador {
         List studentResult = session.createQuery("select a.nombre, a.apellidoP from " + "alumno a").list();        
         session.getTransaction().commit();
     }
-    
-    
-    private synchronized void init(){
-    }
-
-    public String getMessage() {
-        return message;
-    }
-    
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    
     
     public void leerArchivosDeExcel(){
      
@@ -217,6 +182,48 @@ public class PruebaControlador {
             System.out.println("");        
         }
         fillListaAlumnos();
+    }
+    
+    public Maestro getMaestroTemp() {
+        return maestroTemp;
+    }
+
+    public void setMaestroTemp(Maestro maestroTemp) {
+        this.maestroTemp = maestroTemp;
+    }
+    
+
+    public Alumno getAlumnoTemp() {
+        return alumnoTemp;
+    }
+
+    public void setAlumnoTemp(Alumno alumnoTemp) {
+        this.alumnoTemp = alumnoTemp;
+    }                                 
+    
+    public List getListaMaestros() {
+        return listaMaestros;
+    }
+    public void setListaMaestros(List listaMaestros) {
+        this.listaMaestros = listaMaestros;
+    }
+    
+    public List getListaAlumnos() {
+        return listaAlumnos;
+    }
+    public void setListaAlumnos(List listaAlumnos) {
+        this.listaAlumnos = listaAlumnos;
+    }
+    
+    private synchronized void init(){
+    }
+
+    public String getMessage() {
+        return message;
+    }
+    
+    public void setMessage(String message) {
+        this.message = message;
     }
     
 }

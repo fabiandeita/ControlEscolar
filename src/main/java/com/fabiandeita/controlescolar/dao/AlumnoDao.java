@@ -3,12 +3,10 @@
  * and .
  */
 package com.fabiandeita.controlescolar.dao;
-import com.fabiandeita.controlescolar.bean.PruebaControlador;
 import com.fabiandeita.controlescolar.model.Alumno;
-import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 /**
  * @author ecastrmu
  */
@@ -38,12 +36,22 @@ public class AlumnoDao {
                 session.getTransaction().commit();
     }
     
-    public void deleteAlumno(Alumno alumno){
-                System.out.println("Delete Alumno ----------");
+    public void deleteAlumno(Alumno alumno){ 
+                System.out.println("Delete Alumno 2----------");
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction(); 
                 session.delete(alumno);
-                session.getTransaction().commit();           
+                session.getTransaction().commit(); 
+                
+//                //Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//                Transaction t = session.getTransaction();
+//                t.begin();
+//                session.delete(alumno);
+//                t.commit();
+////                session.close();
+//                
+                
+
     }
     
     public List consultaAlumno(){
