@@ -6,14 +6,17 @@ package com.fabiandeita.controlescolar.bean;
 import com.fabiandeita.controlescolar.dao.AlumnoDao;
 import com.fabiandeita.controlescolar.dao.HibernateUtil;
 import com.fabiandeita.controlescolar.dao.MaestroDao;
+import com.fabiandeita.controlescolar.dao.MateriaDao;
 import com.fabiandeita.controlescolar.model.Alumno;
 import com.fabiandeita.controlescolar.model.Maestro;
+import com.fabiandeita.controlescolar.model.Materia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.faces.event.ActionEvent;
 import java.util.List;
+import javax.faces.event.ValueChangeEvent;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -25,25 +28,40 @@ import org.hibernate.Session;
  * 
  */
 public class PruebaControlador {
-    private String     message;
+   
     private AlumnoDao  alumnoDao;
     private MaestroDao maestroDao;
+    private MateriaDao materiaDao;
     private List       listaAlumnos;
     private List       listaMaestros;
+    private List       listaMateria;
     private Alumno     alumno;
     private Alumno     alumnoTemp;
     private Maestro    maestro;
     private Maestro    maestroTemp;
+    private Materia    materia;
+    private Materia    materiaTemp;
 
     
     public PruebaControlador(){
-        message     = "Hello mundo";
+       
         alumnoDao   = new AlumnoDao();
         maestroDao  = new MaestroDao();
+        materiaDao  = new MateriaDao();
         alumnoTemp  = new Alumno();
         maestroTemp = new Maestro();
+        materiaTemp = new Materia();
+        materiaTemp.setMaestro(new Maestro());
+        
     }
     
+    public void estableceMaestro(ValueChangeEvent event){
+        if(event != null && event.getNewValue() != null){
+            System.out.println("String: " + event.getNewValue().toString());
+            long id = Long.parseLong(event.getNewValue().toString());
+            System.out.println("ID: " + id);
+        }
+    }
     public void addEstudiante(ActionEvent event){
         alumnoDao.addAlumno(alumnoTemp);
         fillListaAlumnos();
@@ -54,6 +72,11 @@ public class PruebaControlador {
         fillListaMaestros();
     }
     
+    public void addMateria(ActionEvent event){
+        materiaDao.addMateria(materiaTemp);
+        fillListaMateria();
+    }
+    
     public void updateEstudiante(ActionEvent event){
         alumno = (Alumno)event.getComponent().getAttributes().get("alumno");
         alumnoDao.updateAlumno(alumno);
@@ -62,6 +85,11 @@ public class PruebaControlador {
     public void updateMaestro(ActionEvent event){
         maestro = (Maestro)event.getComponent().getAttributes().get("maestro");
         maestroDao.updateMaestro(maestro);
+    }
+    
+    public void updateMateria(ActionEvent event){
+        materia = (Materia)event.getComponent().getAttributes().get("materia");
+        materiaDao.updateMateria(materia);
     }
     
     public void deleteEstudiante(ActionEvent event){
@@ -76,12 +104,22 @@ public class PruebaControlador {
         fillListaAlumnos();
     }
     
+    public void deleteMateria(ActionEvent event){
+        Materia materia = (Materia)event.getComponent().getAttributes().get("materia");
+        materiaDao.deleteMateria(materia); 
+        fillListaMateria();
+    }
+    
     public void fillListaAlumnos(){
         listaAlumnos = alumnoDao.consultaAlumno();
     }
     
     public void fillListaMaestros(){
         listaMaestros = maestroDao.consultaMaestro();
+    }
+    
+    public void fillListaMateria(){
+        listaMateria = materiaDao.consultaMateria();
     }
     
     public void clicMaestro(){
@@ -191,8 +229,15 @@ public class PruebaControlador {
     public void setMaestroTemp(Maestro maestroTemp) {
         this.maestroTemp = maestroTemp;
     }
-    
 
+    public Materia getMateriaTemp() {
+        return materiaTemp;
+    }
+
+    public void setMateriaTemp(Materia materiaTemp) {
+        this.materiaTemp = materiaTemp;
+    }
+    
     public Alumno getAlumnoTemp() {
         return alumnoTemp;
     }
@@ -215,15 +260,14 @@ public class PruebaControlador {
         this.listaAlumnos = listaAlumnos;
     }
     
+    
+    public List getListaMateria() {
+        return listaMateria;
+    }
+    public void setListaMateria(List listaMateria) {
+        this.listaMateria = listaMateria;
+    }
+    
     private synchronized void init(){
     }
-
-    public String getMessage() {
-        return message;
-    }
-    
-    public void setMessage(String message) {
-        this.message = message;
-    }
-    
 }

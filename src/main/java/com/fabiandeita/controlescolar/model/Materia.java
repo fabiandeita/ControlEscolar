@@ -5,30 +5,60 @@
  */
 package com.fabiandeita.controlescolar.model;
 
-import javax.persistence.*;
+import javax.persistence.FetchType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-/**
- *
- * @author ecastrmu
- */
 
 @Entity
-@Table( name = "materia" )
+@Table(name = "materia")
 public class Materia {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer materia_id;
+    @Column (name = "materia_id")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long materiaId;
     
-    @Column
+    @Column (name="nombre")
     private String nombre;
 
-    public Integer getMateria_id() {
-        return materia_id;
+//    @ManyToOne 
+    @ManyToOne 
+    @JoinColumn(name="maestro_maestro_id") 
+    private Maestro maestro;
+
+    
+    public Materia() 
+    {
+        
     }
 
-    public void setMateria_id(Integer materia_id) {
-        this.materia_id = materia_id;
+    public Materia(Long materiaId, String nombre, Maestro maestro) {
+        this.materiaId = materiaId;
+        this.nombre = nombre;
+        this.maestro = maestro;
+    }
+
+    public Maestro getMaestro() {
+        return maestro;
+    }
+
+    public void setMaestro(Maestro maestro) {
+        this.maestro = maestro;
+    }
+    
+    
+    public Long getMateriaId() {
+        return materiaId;
+    }
+
+    public void setMateriaId(Long materiaId) {
+        this.materiaId = materiaId;
     }
 
     public String getNombre() {

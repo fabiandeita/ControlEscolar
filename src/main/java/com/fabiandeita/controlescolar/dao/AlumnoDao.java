@@ -41,8 +41,7 @@ public class AlumnoDao {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction(); 
                 session.delete(alumno);
-                session.getTransaction().commit(); 
-                
+                session.getTransaction().commit();
 //                //Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //                Transaction t = session.getTransaction();
 //                t.begin();
@@ -50,8 +49,6 @@ public class AlumnoDao {
 //                t.commit();
 ////                session.close();
 //                
-                
-
     }
     
     public List consultaAlumno(){

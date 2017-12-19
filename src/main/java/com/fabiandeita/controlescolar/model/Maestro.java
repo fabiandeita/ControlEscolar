@@ -20,7 +20,7 @@ public class Maestro {
     @Id
     @Column(name="maestro_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long maestro_id;
+    private Long maestroId;
     
     @Column(name="nombre")
     private String nombre;
@@ -32,7 +32,7 @@ public class Maestro {
     private String apellidoM;
 
     public Maestro(Long maestroId, String nombre, String apellidoP, String apellidoM) {
-        this.maestro_id = maestroId;
+        this.maestroId = maestroId;
         this.nombre     = nombre;
         this.apellidoP  = apellidoP;
         this.apellidoM  = apellidoM;
@@ -51,17 +51,11 @@ public class Maestro {
     public Maestro() {
     }
     
-    public Maestro(Long id) {
-        this.maestro_id = id;
+    public Maestro(Long maestroId) {
+        this.maestroId = maestroId;
     }
    
-    public Long getMaestro_id() {
-        return maestro_id;
-    }
-
-    public void setMaestro_id(Long maestro_id) {
-        this.maestro_id = maestro_id;
-    }
+   
 
     public String getNombre() {
         return nombre;
@@ -85,5 +79,13 @@ public class Maestro {
 
     public void setApellidoM(String apellidoM) {
         this.apellidoM = apellidoM;
+    }
+
+    public Long getMaestroId() {
+        return maestroId;
+    }
+
+    public void setMaestroId(Long maestroId) {
+        this.maestroId = maestroId;
     }
 }
