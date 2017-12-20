@@ -1,17 +1,12 @@
-/*
- * To change this licens.
- * To change this templa
- * and open the template.
- */
+
 package com.fabiandeita.controlescolar.model;
 
-import javax.persistence.*;
-
-/**
- *
- * @author ecastrmu
- * 
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table( name = "maestro" )
@@ -55,8 +50,7 @@ public class Maestro {
         this.maestroId = maestroId;
     }
    
-   
-
+  
     public String getNombre() {
         return nombre;
     }

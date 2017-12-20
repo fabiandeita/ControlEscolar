@@ -10,14 +10,12 @@
     <h:head>
         <title>Catalogo</title>
     </h:head>
-    <h:body><h1 align="center">Catalogo</h1>
+        <h:body><h1 align="center">Catalogo</h1>
         <!--br/>
         <h:link outcome="welcomeIcefaces" value="ICEfaces welcome page #{pruebaComponent.message} " /  -->
         <h:form style="color: blue; align-content: center"><br/><br/>
 
-<!--ace:linkButton id="link3" value="Clic xlsx (listar) " action="#{pruebaComponent.leerArchivosDeExcel}" style="color: blue"></ace:linkButton><br/><br/-->
-<!--ace:linkButton id="link3" value="Clic Maestro (listar) " action="#{pruebaComponent.clicMaestro}" style="color: blue"></ace:linkButton><br/><br/-->
-            <!-- ace:dataTable -->   
+<!--ace:linkButton id="link3" value="Clic xlsx (listar) " action="#{pruebaComponent.leerArchivosDeExcel}" style="color: blue"></ace:linkButton><br/><br/-->   
             <!-- panel-popup   -->
 
         </h:form>
@@ -52,21 +50,21 @@
                     <ace:accordionPane id="alumnos" title="Alumnos">
 
 
-                        <ace:tabSet id="tabset" clientSide="false">
+                        <ace:tabSet id="tabset" clientSide="true">
                             <ace:tabPane id="agregar" label="Agregar"> <!-- Inicializa agregar -->
 
                                 <ace:panel id="personalInfoInputPanel" header="Personal Info" styleClass="required-styling-demo">
                                     <h:panelGrid id="inputGrid" columns="3" width="100%" styleClass="textEntryInputTable">
                                         <ace:textEntry id="firstNameInput" value="#{pruebaComponent.alumnoTemp.nombre}" label="Nombre" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
-                                            <ace:ajax render="@this firstNameOutput firstNameMsg" event="blur"/>
+                                            <!--ace:ajax render="@this firstNameOutput firstNameMsg" event="blur"/-->
                                         </ace:textEntry>
 
                                         <ace:textEntry id="lastNamePatherInput" value="#{pruebaComponent.alumnoTemp.apellidoP}" label="Apellido Paterno" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
-                                            <ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/>
+                                            <!--ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/-->
                                         </ace:textEntry>
 
                                         <ace:textEntry id="lastMatherNameInput" value="#{pruebaComponent.alumnoTemp.apellidoM}" label="Apellido Materno" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
-                                            <ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/>
+                                            <!--ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/-->
                                         </ace:textEntry>
                                         <h:commandButton value="Agregar"  style="color: yellow;" actionListener="#{pruebaComponent.addEstudiante}" class="button">
                                             <f:attribute name="alumnoTemp" value="#{pruebaComponent.alumnoTemp}" />
@@ -201,7 +199,7 @@
                     </ace:accordionPane> <!-- Finaliza acordion Maestros -->
 
                     <!-- Inicia Materia -->
-                    <ace:accordionPane id="materia" title="Materia">
+                    <ace:accordionPane id="materia" title="Materia" rendered="true">
                         <h1>Hello Materia!!</h1>
                         <ace:tabSet id="tabsetMateria" clientSide="false" rendered="true">
                             <ace:tabPane id="agregarMateria" label="AgregarMateria" rendered="true" > <!-- Inicializa agregar -->      
@@ -211,17 +209,30 @@
                                         </ace:textEntry>
 
                                         <!--  null  -->
-                                        <!--  null  -->
-                                        <!--  null  -->
                                         <ace:textEntry id="InputMateriaMaestroId" value="#{pruebaComponent.materiaTemp.maestro.maestroId}"  label="Maestro Id" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right"/>
-                                        <ace:selectMenu valueChangeListener="#{pruebaComponent.estableceMaestro}" >
-                                            <f:selectItem id="0" value="Salvador" />
-                                            <f:selectItem id="1" value="Emma" />
-                                            <!--f:selectItems value="" /> //se crea un alista con obetos de tipo SelectedItem  -->
-                                        </ace:selectMenu>
+                                    <!-- Combo Maestros -->    
+                                    <br />
+                                    <h:outputLabel for="materiaId" value="Maestro" rendered="false" />
+                                        <ace:selectMenu id="maestroId"  valueChangeListener="#{pruebaComponent.estableceMaestro}"  readonly="false">
+                                            <f:selectItem itemLabel="Selecciona la Maestro" itemValue="" />  
+                                            <!--f:selectItems value="#{pruebaComponent.listaMaestross}" /-->
+                                                
+					</ace:selectMenu>
+                                        
+                                    <!-- Combo materia -->
+                                        <h:outputLabel for="materiaId" value="Materia"/>
+                                        <ace:selectMenu id="materiaId"  valueChangeListener="#{pruebaComponent.estableceMateria}" rendered="true" >
+                                            <f:selectItem itemLabel="Selecciona la Materia" itemValue="" />  
+                                            <f:selectItems value="#{pruebaComponent.listaMaterias}" />
+                                                
+					</ace:selectMenu>
+                                        
+                                        
                                         <h:commandButton value="AgregarMateria"  style="color: yellow;" actionListener="#{pruebaComponent.addMateria}" class="button">
                                             <f:attribute name="materiaTemp" value="#{pruebaComponent.materiaTemp}" />
                                         </h:commandButton>
+                                    
+                                    
                                     </h:panelGrid>
                                 </ace:panel>   
                             </ace:tabPane> <!-- finalizan agregar Materia -->
@@ -240,9 +251,10 @@
                                         </ace:column>
                                         <ace:column id="nombremateria" headerText="NOMBRE" sortBy="" filterBy="" filterMatchMode="contains">
                                             <h:inputText id="nombreOutmateria" value="#{_materia.nombre}"/>
-                                        </ace:column>       
+                                        </ace:column>
+                                        
                                         <ace:column id="apellidoPmateria" headerText="Id maestro" sortBy="" filterBy="" filterMatchMode="contains">
-                                            <h:inputText id="apellidoPOutmateria" value="#{_materia.maestro.maestroId}" rendered="#{_materia.maestro ne null}"/>
+                                            <!--h:inputText id="apellidoPOutmateria" value="#{_materia.maestro.maestroId}" rendered="#{_materia.maestro ne null}"/-->
                                         </ace:column>
 
                                         <ace:column id="accionesMateria" headerText="ACCIONES" sortBy="" filterBy="" filterMatchMode="contains">     
@@ -259,10 +271,8 @@
                         </ace:tabSet> <!-- Finaliza el TabSet -->     
                     </ace:accordionPane> <!-- Finaliza acordion Materia -->
                     <!-- Finaliza Materia-->
+                    
                     <!-- Inicia Alumno_has_materia -->
-
-
-
                     <!-- Finaliza Alumno_has_materia -->
 
                 </ace:accordion>      

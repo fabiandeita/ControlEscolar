@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.faces.event.ActionEvent;
 import java.util.List;
+
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -41,27 +43,57 @@ public class PruebaControlador {
     private Maestro    maestroTemp;
     private Materia    materia;
     private Materia    materiaTemp;
+    private List<SelectItem> listaMaterias;
+    private List<SelectItem> listaMaestross;
 
     
-    public PruebaControlador(){
-       
+    public PruebaControlador(){   
         alumnoDao   = new AlumnoDao();
         maestroDao  = new MaestroDao();
         materiaDao  = new MateriaDao();
         alumnoTemp  = new Alumno();
         maestroTemp = new Maestro();
         materiaTemp = new Materia();
-        materiaTemp.setMaestro(new Maestro());
         
+        materiaTemp.setMaestro(new  Maestro());
+        cargarMaterias();
+        //cargarMaestros();
     }
     
-    public void estableceMaestro(ValueChangeEvent event){
+    public void cargarMaterias(){
+        listaMaterias = new ArrayList<SelectItem>();
+        listaMaterias.clear();
+        for(Materia materia : (List<Materia>)materiaDao.consultaMateria())
+            listaMaterias.add(new SelectItem(materia.getMateriaId(), materia.getNombre()));
+    }
+    
+    public void estableceMateria(ValueChangeEvent event){
         if(event != null && event.getNewValue() != null){
-            System.out.println("String: " + event.getNewValue().toString());
-            long id = Long.parseLong(event.getNewValue().toString());
-            System.out.println("ID: " + id);
+            //materiaTemp.setMateriaId(Long.parseLong(event.getNewValue().toString()));
+            System.out.println("Evento antes: " );
+//            System.out.println("Evento: " + event.getNewValue()  + " Termina evento" );     
+            System.out.println("Evento DESPUES: " );
         }
     }
+      
+    
+    public void cargarMaestros(){
+        listaMaestross = new ArrayList<SelectItem>();
+        listaMaestross.clear();
+        for(Maestro maestro : (List<Maestro>)maestroDao.consultaMaestro())
+            listaMaestross.add(new SelectItem(maestro.getMaestroId(), maestro.getNombre()));
+    }
+//    
+    public void estableceMaestro(ValueChangeEvent event){
+        if(event != null && event.getNewValue() != null){
+            System.out.println("String 1: " + event.getNewValue().toString());
+            System.out.println("String 2: " + event.getNewValue().toString());
+//            long id = Long.parseLong(event.getNewValue().toString());
+//            System.out.println("ID: " + id);
+        }
+    }
+    
+    
     public void addEstudiante(ActionEvent event){
         alumnoDao.addAlumno(alumnoTemp);
         fillListaAlumnos();
@@ -135,6 +167,73 @@ public class PruebaControlador {
         List studentResult = session.createQuery("select a.nombre, a.apellidoP from " + "alumno a").list();        
         session.getTransaction().commit();
     }
+    
+    public Maestro getMaestroTemp() {
+        return maestroTemp;
+    }
+
+    public void setMaestroTemp(Maestro maestroTemp) {
+        this.maestroTemp = maestroTemp;
+    }
+
+    public Materia getMateriaTemp() {
+        return materiaTemp;
+    }
+
+    public void setMateriaTemp(Materia materiaTemp) {
+        this.materiaTemp = materiaTemp;
+    }
+    
+    public Alumno getAlumnoTemp() {
+        return alumnoTemp;
+    }
+
+    public void setAlumnoTemp(Alumno alumnoTemp) {
+        this.alumnoTemp = alumnoTemp;
+    }                                 
+    
+    public List getListaMaestros() {
+        return listaMaestros;
+    }
+    public void setListaMaestros(List listaMaestros) {
+        this.listaMaestros = listaMaestros;
+    }
+    
+    public List getListaAlumnos() {
+        return listaAlumnos;
+    }
+    public void setListaAlumnos(List listaAlumnos) {
+        this.listaAlumnos = listaAlumnos;
+    }
+    
+    
+    public List getListaMateria() {
+        return listaMateria;
+    }
+    public void setListaMateria(List listaMateria) {
+        this.listaMateria = listaMateria;
+    }
+    
+    private synchronized void init(){
+    }
+    
+    
+    public List<SelectItem> getListaMaestross() {
+        return listaMaestross;
+    }
+
+    public void setListaMaestross(List<SelectItem> listaMaestross) {
+        this.listaMaestross = listaMaestross;
+    }
+
+    public List<SelectItem> getListaMaterias() {
+        return listaMaterias;
+    }
+
+    public void setListaMaterias(List<SelectItem> listaMaterias) {
+        this.listaMaterias = listaMaterias;
+    }
+    
     
     public void leerArchivosDeExcel(){
      
@@ -222,52 +321,4 @@ public class PruebaControlador {
         fillListaAlumnos();
     }
     
-    public Maestro getMaestroTemp() {
-        return maestroTemp;
-    }
-
-    public void setMaestroTemp(Maestro maestroTemp) {
-        this.maestroTemp = maestroTemp;
-    }
-
-    public Materia getMateriaTemp() {
-        return materiaTemp;
-    }
-
-    public void setMateriaTemp(Materia materiaTemp) {
-        this.materiaTemp = materiaTemp;
-    }
-    
-    public Alumno getAlumnoTemp() {
-        return alumnoTemp;
-    }
-
-    public void setAlumnoTemp(Alumno alumnoTemp) {
-        this.alumnoTemp = alumnoTemp;
-    }                                 
-    
-    public List getListaMaestros() {
-        return listaMaestros;
-    }
-    public void setListaMaestros(List listaMaestros) {
-        this.listaMaestros = listaMaestros;
-    }
-    
-    public List getListaAlumnos() {
-        return listaAlumnos;
-    }
-    public void setListaAlumnos(List listaAlumnos) {
-        this.listaAlumnos = listaAlumnos;
-    }
-    
-    
-    public List getListaMateria() {
-        return listaMateria;
-    }
-    public void setListaMateria(List listaMateria) {
-        this.listaMateria = listaMateria;
-    }
-    
-    private synchronized void init(){
-    }
 }
