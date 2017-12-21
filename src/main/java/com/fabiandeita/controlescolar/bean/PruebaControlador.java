@@ -34,6 +34,8 @@ public class PruebaControlador {
     private AlumnoDao  alumnoDao;
     private MaestroDao maestroDao;
     private MateriaDao materiaDao;
+    //listaAlumnos = alumnoDao.consultaAlumno();
+    //Se usa para retornar el valor del dao alumno
     private List       listaAlumnos;
     private List       listaMaestros;
     private List       listaMateria;
@@ -42,9 +44,14 @@ public class PruebaControlador {
     private Maestro    maestro;
     private Maestro    maestroTemp;
     private Materia    materia;
+    
+    
     private Materia    materiaTemp;
+    
+    //Se usa para llenar el combo materias
     private List<SelectItem> listaMaterias;
-    private List<SelectItem> listaMaestross;
+    
+    //private List<SelectItem> listaMaestross;
 
     
     public PruebaControlador(){   
@@ -55,7 +62,8 @@ public class PruebaControlador {
         maestroTemp = new Maestro();
         materiaTemp = new Materia();
         
-        materiaTemp.setMaestro(new  Maestro());
+        // Checar
+        //materiaTemp.setMaestro(new  Maestro());
         
 //        cargarMaterias();
 //        cargarMaestros();
@@ -81,13 +89,13 @@ public class PruebaControlador {
         }
     }
       
-    
-    public void cargarMaestros(){
-        listaMaestross = new ArrayList<SelectItem>();
-//        listaMaestross.clear();
-        for(Maestro maestro : (List<Maestro>)maestroDao.consultaMaestro())
-            listaMaestross.add(new SelectItem(maestro.getMaestroId(), maestro.getNombre()));
-    }
+//    
+//    public void cargarMaestros(){
+//        listaMaestross = new ArrayList<SelectItem>();
+////        listaMaestross.clear();
+//        for(Maestro maestro : (List<Maestro>)maestroDao.consultaMaestro())
+//            listaMaestross.add(new SelectItem(maestro.getMaestroId(), maestro.getNombre()));
+//    }
 //    
     public void estableceMaestro(ValueChangeEvent event){
         if(event != null && event.getNewValue() != null){
@@ -109,11 +117,11 @@ public class PruebaControlador {
         fillListaMaestros();
     }
     
-    // Se requiere llenar el Id manualmente
-    public void addMateria(ActionEvent event){
-        materiaDao.addMateria(materiaTemp);
-        fillListaMateria();
-    }
+//    Se requiere llenar el Id manualmente
+//    public void addMateria(ActionEvent event){
+//        materiaDao.addMateria(materiaTemp);
+//        fillListaMateria();
+//    }
     
     public void updateEstudiante(ActionEvent event){
         alumno = (Alumno)event.getComponent().getAttributes().get("alumno");
@@ -160,19 +168,6 @@ public class PruebaControlador {
         listaMateria = materiaDao.consultaMateria();
     }
     
-    public void clicMaestro(){
-        listaMaestros = maestroDao.consultaMaestro();
-        for (Maestro maestro : (List<Maestro>)listaMaestros) {
-            System.out.println("nombre: " + maestro.getNombre() + " " + maestro.getApellidoP()+ " " + maestro.getApellidoM());
-        }
-    }
-    
-    public void listaAlumnos(){
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();    	
-        List studentResult = session.createQuery("select a.nombre, a.apellidoP from " + "alumno a").list();        
-        session.getTransaction().commit();
-    }
     
     public Maestro getMaestroTemp() {
         return maestroTemp;
@@ -223,14 +218,14 @@ public class PruebaControlador {
     private synchronized void init(){
     }
     
-    
-    public List<SelectItem> getListaMaestross() {
-        return listaMaestross;
-    }
-
-    public void setListaMaestross(List<SelectItem> listaMaestross) {
-        this.listaMaestross = listaMaestross;
-    }
+//    
+//    public List<SelectItem> getListaMaestross() {
+//        return listaMaestross;
+//    }
+//
+//    public void setListaMaestross(List<SelectItem> listaMaestross) {
+//        this.listaMaestross = listaMaestross;
+//    }
 
     public List<SelectItem> getListaMaterias() {
         return listaMaterias;

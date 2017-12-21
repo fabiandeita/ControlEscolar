@@ -1,6 +1,6 @@
 /*
- * To .
- * and .
+ *  .
+ *  .
  */
 package com.fabiandeita.controlescolar.dao;
 import com.fabiandeita.controlescolar.model.Alumno;
@@ -49,6 +49,23 @@ public class AlumnoDao {
 //                t.commit();
 ////                session.close();
 //                
+
+//                final Session session = HibernateUtil.getSession();
+//                try {
+//                  final Transaction transaction = session.beginTransaction();
+//                  try {
+//                    // The real work is here
+//                    transaction.commit();
+//                  } catch (Exception ex) {
+//                    // Log the exception here
+//                    transaction.rollback();
+//                    throw ex;
+//                  }
+//                } finally {
+//                  HibernatilUtil.closeSession();
+//                }
+
+
     }
     
     public List consultaAlumno(){

@@ -13,13 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+// implement Serializable
 @Entity
 @Table( name = "maestro" )
 public class Maestro {
     
     @Id
     @Column(name="maestro_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maestroId;
     
     @Column(name="nombre")
@@ -31,9 +32,10 @@ public class Maestro {
     @Column(name="apellidoM")
     private String apellidoM;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Set<Materia> materias = new HashSet<Materia>();
-//    
+    
+    @ManyToMany(mappedBy = "maestro")
+    private Set<Materia> materias = new HashSet<Materia>();
+    
     
     public Maestro(Long maestroId, String nombre, String apellidoP, String apellidoM) {
         this.maestroId = maestroId;
@@ -55,13 +57,14 @@ public class Maestro {
         this.maestroId = maestroId;
     }
 
-//    public Set<Materia> getMaterias() {
-//        return materias;
-//    }
-//
-//    public void setMaterias(Set<Materia> materias) {
-//        this.materias = materias;
-//    }
+    
+    public Set<Materia> getMaterias() {
+        return materias;
+    }
+
+    public void setMaterias(Set<Materia> materias) {
+        this.materias = materias;
+    }
    
   
     
