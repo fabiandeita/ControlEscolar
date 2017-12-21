@@ -5,6 +5,8 @@
  */
 package com.fabiandeita.controlescolar.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -22,7 +25,7 @@ import javax.persistence.OneToOne;
 @Entity
 @Table(name = "materia")
 public class Materia {
-    
+//public class Materia implements Serializable {
     @Id
     @Column (name = "materia_id")
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,41 +33,9 @@ public class Materia {
     
     @Column (name="nombre")
     private String nombre;
-
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Role.class)
-//    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
-   
-//    @ManyToOne //Checar
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
-    
-//    @OneToMany(cascade=CascadeType.ALL)
-//    @JoinColumn(name="curso_id")
-//    private Set<Curso> cursos;
-
-    
-//    @OneToMany 
-    @OneToOne
+      @OneToOne
     @JoinColumn(name="maestro_maestro_id") 
-    private Maestro maestro;
-//    private Set<Maestro> maestro;
-
-//    public Set<Maestro> getMaestro() {
-//        return maestro;
-//    }
-//
-//    public void setMaestro(Set<Maestro> maestro) {
-//        this.maestro = maestro;
-//    }
-
-    
-    public Materia() 
-    {    }
-
-    public Materia(Long materiaId, String nombre, Maestro maestro) {
-        this.materiaId = materiaId;
-        this.nombre = nombre;
-        this.maestro = maestro;
-    }
+    private Maestro maestro;     
 
     public Maestro getMaestro() {
         return maestro;
@@ -74,6 +45,37 @@ public class Materia {
         this.maestro = maestro;
     }
     
+   
+//    
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinTable(
+//        name = "maestro_asigned_materia", 
+//        joinColumns = { @JoinColumn(name = "materia_materia_id") }, 
+//        inverseJoinColumns = { @JoinColumn(name = "maestro_maestro_id") }
+//    )
+//    Set<Maestro> maestros = new HashSet<Maestro>();
+//    
+//    
+//
+//    public Set<Maestro> getMaestros() {
+//        return maestros;
+//    }
+//
+//    public void setMaestros(Set<Maestro> maestros) {
+//        this.maestros = maestros;
+//    }
+    
+    public Materia() 
+    {    }
+
+    public Materia(Long materiaId, String nombre,  Maestro maestros) {
+//    public Materia(Long materiaId, String nombre, Set< Maestro> maestros) {
+        this.materiaId = materiaId;
+        this.nombre = nombre;
+        this.maestro = maestros;
+//        this.maestros = maestros;
+    }
+
     
     public Long getMateriaId() {
         return materiaId;

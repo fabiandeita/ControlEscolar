@@ -56,22 +56,27 @@ public class PruebaControlador {
         materiaTemp = new Materia();
         
         materiaTemp.setMaestro(new  Maestro());
-        cargarMaterias();
-        //cargarMaestros();
+        
+//        cargarMaterias();
+//        cargarMaestros();
     }
     
     public void cargarMaterias(){
         listaMaterias = new ArrayList<SelectItem>();
         listaMaterias.clear();
+//        listaMateria = materiaDao.consultaMateria();
+        // Not supported transection ()
         for(Materia materia : (List<Materia>)materiaDao.consultaMateria())
+//        for(Materia materia : (List<Materia>)listaMateria)
             listaMaterias.add(new SelectItem(materia.getMateriaId(), materia.getNombre()));
+        
     }
     
     public void estableceMateria(ValueChangeEvent event){
         if(event != null && event.getNewValue() != null){
-            //materiaTemp.setMateriaId(Long.parseLong(event.getNewValue().toString()));
-            System.out.println("Evento antes: " );
-//            System.out.println("Evento: " + event.getNewValue()  + " Termina evento" );     
+//            materiaTemp.setMateriaId(Long.parseLong(event.getNewValue().toString()));
+//            System.out.println("Evento antes: " );
+//            System.out.println("Evento materia: " + materiaTemp.getMateriaId()  + " Termina evento" );     
             System.out.println("Evento DESPUES: " );
         }
     }
@@ -79,7 +84,7 @@ public class PruebaControlador {
     
     public void cargarMaestros(){
         listaMaestross = new ArrayList<SelectItem>();
-        listaMaestross.clear();
+//        listaMaestross.clear();
         for(Maestro maestro : (List<Maestro>)maestroDao.consultaMaestro())
             listaMaestross.add(new SelectItem(maestro.getMaestroId(), maestro.getNombre()));
     }
@@ -104,6 +109,7 @@ public class PruebaControlador {
         fillListaMaestros();
     }
     
+    // Se requiere llenar el Id manualmente
     public void addMateria(ActionEvent event){
         materiaDao.addMateria(materiaTemp);
         fillListaMateria();

@@ -1,11 +1,16 @@
 
 package com.fabiandeita.controlescolar.model;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,31 +31,41 @@ public class Maestro {
     @Column(name="apellidoM")
     private String apellidoM;
 
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Materia> materias = new HashSet<Materia>();
+//    
+    
     public Maestro(Long maestroId, String nombre, String apellidoP, String apellidoM) {
         this.maestroId = maestroId;
         this.nombre     = nombre;
         this.apellidoP  = apellidoP;
         this.apellidoM  = apellidoM;
     }
-
     public Maestro( String nombre, String apellidoP, String apellidoM) {
         this.nombre     = nombre;
         this.apellidoP  = apellidoP;
         this.apellidoM  = apellidoM;
     }
-    
     public Maestro(String nombre) {
         this.nombre = nombre;
     }
-    
     public Maestro() {
     }
-    
     public Maestro(Long maestroId) {
         this.maestroId = maestroId;
     }
+
+//    public Set<Materia> getMaterias() {
+//        return materias;
+//    }
+//
+//    public void setMaterias(Set<Materia> materias) {
+//        this.materias = materias;
+//    }
    
   
+    
+    
     public String getNombre() {
         return nombre;
     }

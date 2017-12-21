@@ -13,6 +13,7 @@
         <h:body><h1 align="center">Catalogo</h1>
         <!--br/>
         <h:link outcome="welcomeIcefaces" value="ICEfaces welcome page #{pruebaComponent.message} " /  -->
+        
         <h:form style="color: blue; align-content: center"><br/><br/>
 
 <!--ace:linkButton id="link3" value="Clic xlsx (listar) " action="#{pruebaComponent.leerArchivosDeExcel}" style="color: blue"></ace:linkButton><br/><br/-->   
@@ -58,11 +59,9 @@
                                         <ace:textEntry id="firstNameInput" value="#{pruebaComponent.alumnoTemp.nombre}" label="Nombre" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
                                             <!--ace:ajax render="@this firstNameOutput firstNameMsg" event="blur"/-->
                                         </ace:textEntry>
-
                                         <ace:textEntry id="lastNamePatherInput" value="#{pruebaComponent.alumnoTemp.apellidoP}" label="Apellido Paterno" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
                                             <!--ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/-->
                                         </ace:textEntry>
-
                                         <ace:textEntry id="lastMatherNameInput" value="#{pruebaComponent.alumnoTemp.apellidoM}" label="Apellido Materno" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
                                             <!--ace:ajax render="@this lastNameOutput lastNameMsg" event="blur"/-->
                                         </ace:textEntry>
@@ -70,7 +69,6 @@
                                             <f:attribute name="alumnoTemp" value="#{pruebaComponent.alumnoTemp}" />
                                         </h:commandButton>
                                     </h:panelGrid>
-
                                     <!--h:panelGrid width="100%">
                                        <ace:message id="firstNameMsg" for="firstNameInput"/>
                                        <ace:message id="lastNameMsg" for="lastNamePatherInput"/>
@@ -155,7 +153,7 @@
                             </ace:tabPane> <!-- finalizan agregar Maestros -->
 
 
-                            <ace:tabPane id="cambiosMaestro" label="CambiosMaestro" > <!-- Inicalizan cambios -->
+                            <ace:tabPane id="cambiosMaestro" label="CambiosMaestro" > <!-- Inicalizan cambios Maestro -->
                                 <ace:linkButton id="link2Maestro" value="Clic Maestro (listar) " action="#{pruebaComponent.fillListaMaestros}" style="color: green"></ace:linkButton><br/><br/>                      
                                 <ace:panel id="panelMaestro">
 
@@ -200,38 +198,38 @@
 
                     <!-- Inicia Materia -->
                     <ace:accordionPane id="materia" title="Materia" rendered="true">
-                        <h1>Hello Materia!!</h1>
+                        <!--h1>Hello Materia!!</h1-->
+                        
+                        <!-- " ac-->   
+                        <ace:linkButton id="cargarMaatearia" value="Clic Materia (cargar) " action="#{pruebaComponent.cargarMaterias()}" style="color: green"></ace:linkButton><br/><br/>                      
+                        
                         <ace:tabSet id="tabsetMateria" clientSide="false" rendered="true">
                             <ace:tabPane id="agregarMateria" label="AgregarMateria" rendered="true" > <!-- Inicializa agregar -->      
                                 <ace:panel id="InfoInputPanelMateria" header=" Info Materia" styleClass="required-styling-demo">
                                     <h:panelGrid id="inputGridMateria" columns="1" width="100%" styleClass="textEntryInputTable">
-                                        <ace:textEntry id="NameInputMateria" value="#{pruebaComponent.materiaTemp.nombre}" label="Nombre" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right">
-                                        </ace:textEntry>
-
+                                        <!--ace:textEntry id="NameInputMateria" value="#{pruebaComponent.materiaTemp.nombre}" label="Nombre" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right"/-->
                                         <!--  null  -->
-                                        <ace:textEntry id="InputMateriaMaestroId" value="#{pruebaComponent.materiaTemp.maestro.maestroId}"  label="Maestro Id" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right"/>
+                                        <!--ace:textEntry id="InputMateriaMaestroId" value="#{pruebaComponent.materiaTemp.maestro.maestroId}"  label="Maestro Id" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right"/-->
                                     <!-- Combo Maestros -->    
-                                    <br />
-                                    <h:outputLabel for="materiaId" value="Maestro" rendered="false" />
-                                        <ace:selectMenu id="maestroId"  valueChangeListener="#{pruebaComponent.estableceMaestro}"  readonly="false">
+                                    <!-- Combo Maestros -->    
+                                        <h:outputLabel for="maestroId" value="Selecciona un Maestro" rendered="true" />
+                                        <ace:selectMenu id="maestroId"  valueChangeListener="#{pruebaComponent.estableceMaestro}" rendered="true" >
                                             <f:selectItem itemLabel="Selecciona la Maestro" itemValue="" />  
-                                            <!--f:selectItems value="#{pruebaComponent.listaMaestross}" /-->
-                                                
-					</ace:selectMenu>
-                                        
+                                            <f:selectItems value="#{pruebaComponent.listaMaestross}" />        
+					</ace:selectMenu><br/>
                                     <!-- Combo materia -->
-                                        <h:outputLabel for="materiaId" value="Materia"/>
+                                    <!-- Combo materia -->
+                                        <h:outputLabel for="materiaId" value="Selecciona una Materia"/>
                                         <ace:selectMenu id="materiaId"  valueChangeListener="#{pruebaComponent.estableceMateria}" rendered="true" >
-                                            <f:selectItem itemLabel="Selecciona la Materia" itemValue="" />  
+                                            <f:selectItem itemLabel="Selecciona una Materia" itemValue=""  />  
                                             <f:selectItems value="#{pruebaComponent.listaMaterias}" />
-                                                
 					</ace:selectMenu>
-                                        
-                                        
+                                        <br/><br/><br/>
+                                        <!-- Evento -->
                                         <h:commandButton value="AgregarMateria"  style="color: yellow;" actionListener="#{pruebaComponent.addMateria}" class="button">
                                             <f:attribute name="materiaTemp" value="#{pruebaComponent.materiaTemp}" />
                                         </h:commandButton>
-                                    
+                                        <br/><br/><br/>
                                     
                                     </h:panelGrid>
                                 </ace:panel>   
@@ -246,14 +244,14 @@
                                                    paginator="true"
                                                    paginatorPosition="bottom"
                                                    rows="10">
-                                        <ace:column id="materia_id" headerText="ID" sortBy="" filterBy="" filterMatchMode="contains">
+                                        <ace:column id="materiaId" headerText="ID" sortBy="" filterBy="" filterMatchMode="contains">
                                             <h:outputText id="idOut" value="#{_materia.materiaId}"/>
                                         </ace:column>
                                         <ace:column id="nombremateria" headerText="NOMBRE" sortBy="" filterBy="" filterMatchMode="contains">
                                             <h:inputText id="nombreOutmateria" value="#{_materia.nombre}"/>
                                         </ace:column>
                                         
-                                        <ace:column id="apellidoPmateria" headerText="Id maestro" sortBy="" filterBy="" filterMatchMode="contains">
+                                        <ace:column id="materiaMaestroId" headerText="Id maestro" sortBy="" filterBy="" filterMatchMode="contains">
                                             <!--h:inputText id="apellidoPOutmateria" value="#{_materia.maestro.maestroId}" rendered="#{_materia.maestro ne null}"/-->
                                         </ace:column>
 
