@@ -1,6 +1,7 @@
 
 package com.fabiandeita.controlescolar.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 // implement Serializable
 @Entity
 @Table( name = "maestro" )
-public class Maestro {
+public class Maestro implements Serializable {
     
     @Id
     @Column(name="maestro_id")
@@ -67,8 +68,6 @@ public class Maestro {
     }
    
   
-    
-    
     public String getNombre() {
         return nombre;
     }
@@ -100,4 +99,17 @@ public class Maestro {
     public void setMaestroId(Long maestroId) {
         this.maestroId = maestroId;
     }
+    
+    public void addMateria(Materia materia)
+    {
+        this.materias.add(materia);
+        materia.addMaestro(this);
+    }
+    
+//    public void addMaestro(Maestro maestro)
+//    {
+//        this.maestros.add(maestro);
+//    }
+//  
+    
 }

@@ -234,6 +234,49 @@ public class PruebaControlador {
     public void setListaMaterias(List<SelectItem> listaMaterias) {
         this.listaMaterias = listaMaterias;
     }
+  
+    
+    public void pruebaMateria(){
+        Materia materia1 = new Materia();
+        // materia (id, nombre) , id ingreso manual ??
+        materia1.setNombre( "materia1");
+        // ingreso manual de Id 21 long
+        materia1.setMateriaId(21l);
+
+        Maestro maestro1 = new Maestro();
+        maestro1.setNombre("maestro1");
+        Maestro maestro2 = new Maestro();
+        maestro2.setNombre("maestro2");
+        Maestro maestro3 = new Maestro();
+        maestro3.setNombre("maestro3");
+        
+        materia1.addMaestro(maestro1);
+        materia1.addMaestro(maestro2);
+        materia1.addMaestro(maestro3);
+
+        Materia materia2 = new Materia();
+        materia2.setNombre("materia2");
+        // ingreso manual de Id 22 long
+        materia2.setMateriaId(22l);
+
+        Maestro maestro4 = new Maestro();
+        maestro4.setNombre("maestro4");
+        Maestro maestro5 = new Maestro();
+        maestro5.setNombre("maestro5");
+        Maestro maestro6 = new Maestro();
+        maestro6.setNombre("maestro6");
+        
+        materia2.addMaestro(maestro4);
+        materia2.addMaestro(maestro5);
+        materia2.addMaestro(maestro6);
+
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
+        sesion.beginTransaction();
+        sesion.save(materia1);
+        sesion.save(materia2);
+        sesion.getTransaction().commit();
+        sesion.close();
+    }
     
     
     public void leerArchivosDeExcel(){

@@ -193,6 +193,7 @@
                         
                         <!-- " ac-->   
                         <ace:linkButton id="cargarMaatearia" value="Clic Materia (cargar) " action="#{pruebaComponent.cargarMaterias()}" style="color: green"/><br/><br/>                      
+                        <ace:linkButton id="pruebaMateria2" value="Clic Materia prueba (Muchos-muchos) " action="#{pruebaComponent.pruebaMateria}" style="color: green"/><br/><br/>                      
                         
                         <ace:tabSet id="tabsetMateria" clientSide="false" rendered="true">
                             <ace:tabPane id="agregarMateria" label="AgregarMateria" rendered="true" > <!-- Inicializa agregar -->      
@@ -230,6 +231,7 @@
 
                             <ace:tabPane id="cambiosMateria" label="CambiosMateria" rendered="true"> <!-- Inicalizan cambios -->
                                 <ace:linkButton id="link2Materia" value="Clic Materia (listar) " action="#{pruebaComponent.fillListaMateria}" style="color: green"/><br/><br/>                      
+                                <ace:linkButton id="pruebaMateria" value="Clic Materia prueba (Muchos-muchos) " action="#{pruebaComponent.pruebaMateria}" style="color: green"/><br/><br/>                      
                                 <ace:panel id="panelMateria">               
                                     <ace:dataTable id="controlTableMateria"
                                                    value="#{pruebaComponent.listaMateria}"
@@ -243,7 +245,9 @@
                                         <ace:column id="nombremateria" headerText="NOMBRE" sortBy="" filterBy="" filterMatchMode="contains">
                                             <h:inputText id="nombreOutmateria" value="#{_materia.nombre}"/>
                                         </ace:column>
+                                       
                                         
+                                        <!-- Aun no se ha agregado materia, faltante Id materia, entre otras cosas -->
                                         <ace:column id="materiaMaestroId" headerText="Id maestro" sortBy="" filterBy="" filterMatchMode="contains">
                                             <!-- Ya no existe maestro maestroId -->
                                             <!-- Incluir el nombre del maestro  -->

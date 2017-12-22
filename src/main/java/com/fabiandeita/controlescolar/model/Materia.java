@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fabiandeita.controlescolar.model;
 
 import java.io.Serializable;
@@ -26,7 +22,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "materia")
-public class Materia {
+public class Materia implements Serializable {
 //public class Materia implements Serializable {
     @Id
     @Column (name = "materia_id")
@@ -51,32 +47,27 @@ public class Materia {
         inverseJoinColumns = { @JoinColumn(name = "maestro_id") }
     )
 //    Set<Maestro> maestros = new HashSet<Maestro>();
-    Set<Maestro> maestro;
+    Set<Maestro> maestros;
    
 
     public Materia() 
-    {   
-//        this.maestro = new HashSet<Maestro>();
+    {
     }
 
-//    public Materia(Long materiaId, String nombre,  Maestro maestros) {
     public Materia(Long materiaId, String nombre, Set< Maestro> maestro) {
-        this.maestro = new HashSet<Maestro>();
+        this.maestros = new HashSet<Maestro>();
         this.materiaId = materiaId;
         this.nombre = nombre;
-//        this.maestro = maestros;
-       
+//      this.maestro = maestros;  
     }
 
     public Set<Maestro> getMaestro() {
-        return maestro;
+        return maestros;
     }
 
     public void setMaestro(Set<Maestro> maestro) {
-        this.maestro = maestro;
+        this.maestros = maestro;
     }
-
-    
     
     public Long getMateriaId() {
         return materiaId;
@@ -95,4 +86,9 @@ public class Materia {
     }
     
     
+    public void addMaestro(Maestro maestro)
+    {
+        this.maestros.add(maestro);
+    }
+
 }
