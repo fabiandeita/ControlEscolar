@@ -2,7 +2,9 @@
 package com.fabiandeita.controlescolar.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -13,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -21,53 +25,38 @@ import javax.persistence.OneToOne;
 
 
 @Entity
-@Table(name = "materia")
+@Table(name = "materiaprueba")
 public class Materia  {
-//public class Materia implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "materia_id")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long materiaId;
     
     @Column (name="nombre")
     private String nombre;
-//    @OneToOne
-//    @JoinColumn(name="maestro_maestro_id")
-//    private Maestro maestro;
-//    public Maestro getMaestro() {
-//        return maestro;}
-//    public void setMaestro(Maestro maestro) {
-//        this.maestro = maestro;
-//    }
-   
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "Materia_Maestro", 
-        joinColumns = { @JoinColumn(name = "materia_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "maestro_id") }
-    )
-//    Set<Maestro> maestros = new HashSet<Maestro>();
-    Set<Maestro> maestro;
-   
 
+    @ManyToMany(mappedBy = "materias")
+    private List<Maestro> maestros = new ArrayList<Maestro>();
+    
+    
     public Materia() 
-    {
-    }
+    {    }
 
-    public Materia(Long materiaId, String nombre, Set< Maestro> maestro) {
-        this.maestro = new HashSet<Maestro>();
+    public Materia(Long materiaId, String nombre) {
+//        this.maestro = new HashSet<Maestro>();
         this.materiaId = materiaId;
-        this.nombre = nombre;
-//      this.maestro = maestros;  
+        this.nombre = nombre; 
     }
 
-    public Set<Maestro> getMaestro() {
-        return maestro;
+    public List<Maestro> getMaestros() {
+        return maestros;
     }
 
-    public void setMaestro(Set<Maestro> maestro) {
-        this.maestro = maestro;
+    public void setMaestros(List<Maestro> maestros) {
+        this.maestros = maestros;
     }
+    
     
     public Long getMateriaId() {
         return materiaId;
@@ -85,10 +74,9 @@ public class Materia  {
         this.nombre = nombre;
     }
     
-//    
-//    public void addMaestro(Maestro maestro)
-//    {
-//        this.maestro.add(maestro);
-//    }
+    public void addMaestro(Maestro maestro){
+        this.maestros.add(maestro);
+        maestro.addMateria(this);
+    }
 
 }

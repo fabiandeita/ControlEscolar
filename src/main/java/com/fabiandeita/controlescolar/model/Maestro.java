@@ -2,7 +2,9 @@
 package com.fabiandeita.controlescolar.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,12 +18,12 @@ import javax.persistence.Table;
 
 // implement Serializable
 @Entity
-@Table( name = "maestro" )
-public class Maestro{
-    
+@Table( name = "maestroprueba" )
+public class Maestro implements Serializable
+{    
     @Id
     @Column(name="maestro_id")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long maestroId;
     
     @Column(name="nombre")
@@ -34,9 +36,10 @@ public class Maestro{
     private String apellidoM;
 
     
-    @ManyToMany(mappedBy = "maestro")
-    private Set<Materia> materias = new HashSet<Materia>();
-    
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Materia> materias = new ArrayList<Materia>();
+
     
     public Maestro(Long maestroId, String nombre, String apellidoP, String apellidoM) {
         this.maestroId = maestroId;
@@ -59,15 +62,14 @@ public class Maestro{
     }
 
     
-    public Set<Materia> getMaterias() {
+    public List<Materia> getMaterias() {
         return materias;
     }
 
-    public void setMaterias(Set<Materia> materias) {
+    public void setMaterias(List<Materia> materias) {
         this.materias = materias;
     }
-   
-  
+    
     public String getNombre() {
         return nombre;
     }
@@ -99,17 +101,9 @@ public class Maestro{
     public void setMaestroId(Long maestroId) {
         this.maestroId = maestroId;
     }
-//    
-//    public void addMateria(Materia materia)
-//    {
-//        this.materias.add(materia);
-//        materia.addMaestro(this);
-//    }
-    
-//    public void addMaestro(Maestro maestro)
-//    {
-//        this.maestros.add(maestro);
-//    }
-//  
+
+    public void addMateria(Materia materia){
+        this.materias.add(materia);
+    }
     
 }

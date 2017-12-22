@@ -13,9 +13,11 @@ import com.fabiandeita.controlescolar.model.Materia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import javax.faces.event.ActionEvent;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -237,45 +239,57 @@ public class PruebaControlador {
   
     
     public void pruebaMateria(){
-        Materia materia1 = new Materia();
-        // materia (id, nombre) , id ingreso manual ??
-        materia1.setNombre( "materia1");
-        // ingreso manual de Id 21 long
-        materia1.setMateriaId(21l);
-
-        Maestro maestro1 = new Maestro();
-        maestro1.setNombre("maestro1");
-        Maestro maestro2 = new Maestro();
-        maestro2.setNombre("maestro2");
-        Maestro maestro3 = new Maestro();
-        maestro3.setNombre("maestro3");
         
-//        materia1.addMaestro(maestro1);
-//        materia1.addMaestro(maestro2);
-//        materia1.addMaestro(maestro3);
+    Maestro maestro1 = new Maestro();
+    maestro1.setNombre("maestro1");
+    maestro1.setApellidoM("materno1");
+    maestro1.setMaestroId(112l);
+    
+    Materia materia1 = new Materia();
+    materia1.setNombre("materia1");
+    materia1.setMateriaId(19l);
+    Materia materia2 = new Materia();
+    materia2.setNombre("materia2");
+    materia2.setMateriaId(20l);
+    
+    Materia materia3 = new Materia();
+    materia3.setNombre("materia3");
+    materia3.setMateriaId(21l);
 
-        Materia materia2 = new Materia();
-        materia2.setNombre("materia2");
-        // ingreso manual de Id 22 long
-        materia2.setMateriaId(22l);
+    materia1.addMaestro(maestro1);
+    materia2.addMaestro(maestro1);
+    materia3.addMaestro(maestro1);
 
-        Maestro maestro4 = new Maestro();
-        maestro4.setNombre("maestro4");
-        Maestro maestro5 = new Maestro();
-        maestro5.setNombre("maestro5");
-        Maestro maestro6 = new Maestro();
-        maestro6.setNombre("maestro6");
-//        
-//        materia2.addMaestro(maestro4);
-//        materia2.addMaestro(maestro5);
-//        materia2.addMaestro(maestro6);
 
-        Session sesion = HibernateUtil.getSessionFactory().openSession();
-        sesion.beginTransaction();
-        sesion.save(materia1);
-        sesion.save(materia2);
-        sesion.getTransaction().commit();
-        sesion.close();
+    Maestro maestro2 = new Maestro();
+    maestro2.setNombre("maestro2");
+    maestro2.setMaestroId(13l);
+
+    Materia materia4 = new Materia();
+    materia4.setNombre("materia4");
+    materia4.setMateriaId(22l);
+    Materia materia5 = new Materia();
+    materia5.setNombre("materia5");
+    materia5.setMateriaId(23l);
+    Materia materia6 = new Materia();
+    materia6.setNombre("materia6");
+    materia6.setMateriaId(24l);
+
+    materia4.addMaestro(maestro2);
+    materia5.addMaestro(maestro2);
+    materia6.addMaestro(maestro2);
+
+   maestroDao.addMaestro(maestro1);
+//   maestroDao.addMaestro(maestro2);
+    
+    
+//    Session sesion = HibernateUtil.getSessionFactory().openSession();
+//    sesion.beginTransaction();
+//    sesion.save(maestro1);
+//    sesion.save(maestro2);
+//    sesion.getTransaction().commit();
+//    sesion.close();
+ 
     }
     
     
