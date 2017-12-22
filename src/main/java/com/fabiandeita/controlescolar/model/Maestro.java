@@ -17,7 +17,7 @@ import javax.persistence.Table;
 // implement Serializable
 @Entity
 @Table( name = "maestro" )
-public class Maestro implements Serializable {
+public class Maestro{
     
     @Id
     @Column(name="maestro_id")
@@ -99,12 +99,12 @@ public class Maestro implements Serializable {
     public void setMaestroId(Long maestroId) {
         this.maestroId = maestroId;
     }
-    
-    public void addMateria(Materia materia)
-    {
-        this.materias.add(materia);
-        materia.addMaestro(this);
-    }
+//    
+//    public void addMateria(Materia materia)
+//    {
+//        this.materias.add(materia);
+//        materia.addMaestro(this);
+//    }
     
 //    public void addMaestro(Maestro maestro)
 //    {

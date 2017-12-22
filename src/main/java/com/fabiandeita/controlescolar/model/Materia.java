@@ -22,7 +22,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "materia")
-public class Materia implements Serializable {
+public class Materia  {
 //public class Materia implements Serializable {
     @Id
     @Column (name = "materia_id")
@@ -47,7 +47,7 @@ public class Materia implements Serializable {
         inverseJoinColumns = { @JoinColumn(name = "maestro_id") }
     )
 //    Set<Maestro> maestros = new HashSet<Maestro>();
-    Set<Maestro> maestros;
+    Set<Maestro> maestro;
    
 
     public Materia() 
@@ -55,18 +55,18 @@ public class Materia implements Serializable {
     }
 
     public Materia(Long materiaId, String nombre, Set< Maestro> maestro) {
-        this.maestros = new HashSet<Maestro>();
+        this.maestro = new HashSet<Maestro>();
         this.materiaId = materiaId;
         this.nombre = nombre;
 //      this.maestro = maestros;  
     }
 
     public Set<Maestro> getMaestro() {
-        return maestros;
+        return maestro;
     }
 
     public void setMaestro(Set<Maestro> maestro) {
-        this.maestros = maestro;
+        this.maestro = maestro;
     }
     
     public Long getMateriaId() {
@@ -85,10 +85,10 @@ public class Materia implements Serializable {
         this.nombre = nombre;
     }
     
-    
-    public void addMaestro(Maestro maestro)
-    {
-        this.maestros.add(maestro);
-    }
+//    
+//    public void addMaestro(Maestro maestro)
+//    {
+//        this.maestro.add(maestro);
+//    }
 
 }

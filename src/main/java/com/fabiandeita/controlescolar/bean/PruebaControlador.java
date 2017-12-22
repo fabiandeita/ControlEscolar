@@ -250,9 +250,9 @@ public class PruebaControlador {
         Maestro maestro3 = new Maestro();
         maestro3.setNombre("maestro3");
         
-        materia1.addMaestro(maestro1);
-        materia1.addMaestro(maestro2);
-        materia1.addMaestro(maestro3);
+//        materia1.addMaestro(maestro1);
+//        materia1.addMaestro(maestro2);
+//        materia1.addMaestro(maestro3);
 
         Materia materia2 = new Materia();
         materia2.setNombre("materia2");
@@ -265,10 +265,10 @@ public class PruebaControlador {
         maestro5.setNombre("maestro5");
         Maestro maestro6 = new Maestro();
         maestro6.setNombre("maestro6");
-        
-        materia2.addMaestro(maestro4);
-        materia2.addMaestro(maestro5);
-        materia2.addMaestro(maestro6);
+//        
+//        materia2.addMaestro(maestro4);
+//        materia2.addMaestro(maestro5);
+//        materia2.addMaestro(maestro6);
 
         Session sesion = HibernateUtil.getSessionFactory().openSession();
         sesion.beginTransaction();
