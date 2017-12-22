@@ -279,6 +279,10 @@ public class PruebaControlador {
     materia5.addMaestro(maestro2);
     materia6.addMaestro(maestro2);
 
+    
+    materiaDao.addMateria(materia1);
+    materiaDao.addMateria(materia2);
+    materiaDao.addMateria(materia3);
    maestroDao.addMaestro(maestro1);
 //   maestroDao.addMaestro(maestro2);
     
