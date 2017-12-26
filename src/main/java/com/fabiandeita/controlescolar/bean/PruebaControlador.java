@@ -4,7 +4,7 @@
 package com.fabiandeita.controlescolar.bean;
 
 import com.fabiandeita.controlescolar.dao.AlumnoDao;
-import com.fabiandeita.controlescolar.dao.HibernateUtil;
+//import com.fabiandeita.controlescolar.dao.HibernateUtil;
 import com.fabiandeita.controlescolar.dao.MaestroDao;
 import com.fabiandeita.controlescolar.dao.MateriaDao;
 import com.fabiandeita.controlescolar.model.Alumno;
@@ -13,11 +13,11 @@ import com.fabiandeita.controlescolar.model.Materia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Iterator;
 import javax.faces.event.ActionEvent;
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -41,12 +41,12 @@ public class PruebaControlador {
     private List       listaAlumnos;
     private List       listaMaestros;
     private List       listaMateria;
+    private List       listaMateriaJoinMaestros;
     private Alumno     alumno;
     private Alumno     alumnoTemp;
     private Maestro    maestro;
     private Maestro    maestroTemp;
     private Materia    materia;
-    
     
     private Materia    materiaTemp;
     
@@ -114,16 +114,19 @@ public class PruebaControlador {
         fillListaAlumnos();
     }
     
+    /**********************************************************************/
+    /******************     Adiciona Maestro     **************************/
+    /**********************************************************************/
     public void addMaestro(ActionEvent event){
         maestroDao.addMaestro(maestroTemp);
         fillListaMaestros();
     }
     
-//    Se requiere llenar el Id manualmente
-//    public void addMateria(ActionEvent event){
-//        materiaDao.addMateria(materiaTemp);
-//        fillListaMateria();
-//    }
+    public void addMateria(ActionEvent event){
+        materiaDao.addMateria(materiaTemp);
+        fillListaMateria();
+    }
+    
     
     public void updateEstudiante(ActionEvent event){
         alumno = (Alumno)event.getComponent().getAttributes().get("alumno");
@@ -170,6 +173,9 @@ public class PruebaControlador {
         listaMateria = materiaDao.consultaMateria();
     }
     
+    public void fillListaMateriaJoinMaestros(){
+        listaMateriaJoinMaestros = materiaDao.consultaMateriaJoinMaestros();
+    }
     
     public Maestro getMaestroTemp() {
         return maestroTemp;
@@ -209,7 +215,6 @@ public class PruebaControlador {
         this.listaAlumnos = listaAlumnos;
     }
     
-    
     public List getListaMateria() {
         return listaMateria;
     }
@@ -220,15 +225,6 @@ public class PruebaControlador {
     private synchronized void init(){
     }
     
-//    
-//    public List<SelectItem> getListaMaestross() {
-//        return listaMaestross;
-//    }
-//
-//    public void setListaMaestross(List<SelectItem> listaMaestross) {
-//        this.listaMaestross = listaMaestross;
-//    }
-
     public List<SelectItem> getListaMaterias() {
         return listaMaterias;
     }
@@ -236,64 +232,79 @@ public class PruebaControlador {
     public void setListaMaterias(List<SelectItem> listaMaterias) {
         this.listaMaterias = listaMaterias;
     }
+
+    public List getListaMateriaJoinMaestros() {
+        return listaMateriaJoinMaestros;
+    }
+
+    public void setListaMateriaJoinMaestros(List listaMateriaJoinMaestros) {
+        this.listaMateriaJoinMaestros = listaMateriaJoinMaestros;
+    }
   
     
-    public void pruebaMateria(){
+    /**********************************************************************/
+    public void registrarMaestro(ActionEvent event){
+        System.out.println("");
+        System.out.println(" " + maestroTemp.getNombre() + " " + maestroTemp.getApellidoP() + " " + maestroTemp.getApellidoM());
+        System.out.println();
+    }
+    /**********************************************************************/
+    public void regitrarMateria(ActionEvent event){
+        System.out.println("");
+        System.out.println(" " + maestroTemp.getNombre() + " " + maestroTemp.getApellidoP() + " " + maestroTemp.getApellidoM() + " " + materiaTemp.getNombre());
+        System.out.println();
         
-    Maestro maestro1 = new Maestro();
-    maestro1.setNombre("maestro1");
-    maestro1.setApellidoM("materno1");
-    maestro1.setMaestroId(112l);
+        Materia materia = new Materia();
+        //El id de la materia es incorrecto puesto que se grab el ultimo 
+        materia = materiaTemp;
+        materia.addMaestro(maestroTemp);
+        materiaDao.addMateria(materia);
+        
+    }
     
-    Materia materia1 = new Materia();
-    materia1.setNombre("materia1");
-    materia1.setMateriaId(19l);
-    Materia materia2 = new Materia();
-    materia2.setNombre("materia2");
-    materia2.setMateriaId(20l);
+    public void saveMaestroMateria(ActionEvent event){
+    }
     
-    Materia materia3 = new Materia();
-    materia3.setNombre("materia3");
-    materia3.setMateriaId(21l);
+    public void pruebaMateria(){
+        Maestro maestro1 = new Maestro();
+        maestro1.setNombre("maestro1");
+        maestro1.setApellidoM("materno1");
 
-    materia1.addMaestro(maestro1);
-    materia2.addMaestro(maestro1);
-    materia3.addMaestro(maestro1);
-
-
-    Maestro maestro2 = new Maestro();
-    maestro2.setNombre("maestro2");
-    maestro2.setMaestroId(13l);
-
-    Materia materia4 = new Materia();
-    materia4.setNombre("materia4");
-    materia4.setMateriaId(22l);
-    Materia materia5 = new Materia();
-    materia5.setNombre("materia5");
-    materia5.setMateriaId(23l);
-    Materia materia6 = new Materia();
-    materia6.setNombre("materia6");
-    materia6.setMateriaId(24l);
-
-    materia4.addMaestro(maestro2);
-    materia5.addMaestro(maestro2);
-    materia6.addMaestro(maestro2);
-
+        Materia materia1 = new Materia();
+        materia1.setNombre("materia1");
     
-    materiaDao.addMateria(materia1);
-    materiaDao.addMateria(materia2);
-    materiaDao.addMateria(materia3);
-   maestroDao.addMaestro(maestro1);
-//   maestroDao.addMaestro(maestro2);
+        Materia materia2 = new Materia();
+        materia2.setNombre("materia2");
+
+        Materia materia3 = new Materia();
+        materia3.setNombre("materia3");
+
+        materia1.addMaestro(maestro1);
+        materia2.addMaestro(maestro1);
+        materia3.addMaestro(maestro1);
+
+        Maestro maestro2 = new Maestro();
+        maestro2.setNombre("maestro2");
+
+        Materia materia4 = new Materia();
+        materia4.setNombre("materia4");
     
+        Materia materia5 = new Materia();
+        materia5.setNombre("materia5");
     
-//    Session sesion = HibernateUtil.getSessionFactory().openSession();
-//    sesion.beginTransaction();
-//    sesion.save(maestro1);
-//    sesion.save(maestro2);
-//    sesion.getTransaction().commit();
-//    sesion.close();
- 
+        Materia materia6 = new Materia();
+        materia6.setNombre("materia6");
+
+        materia4.addMaestro(maestro2);
+        materia5.addMaestro(maestro2);
+        materia6.addMaestro(maestro2);
+
+        materiaDao.addMateria(materia1);
+        materiaDao.addMateria(materia2);
+        materiaDao.addMateria(materia3);
+
+        maestroDao.addMaestro(maestro1);
+        maestroDao.addMaestro(maestro2);
     }
     
     
