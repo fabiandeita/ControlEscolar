@@ -32,8 +32,8 @@
         <mapping class="com.fabiandeita.controlescolar.model.Alumno"/>   
         <mapping class="com.fabiandeita.controlescolar.model.Maestro"/>   
         <mapping class="com.fabiandeita.controlescolar.model.Materia"/>   
-        <mapping class="com.fabiandeita.controlescolar.model.MaestropruebaMateriaprueba" />
-        <!--mapping class="com.fabiandeita.controlescolar.model.MaestropruebaMateriaprueba"/-->   
+        
+        <!--mapping class="com.fabiandeita.controlescolar.model.MaestropruebaMateriapruebaId"/-->   
         <!--mapping class="com.fabiandeita.controlescolar.model.AlumnoHasMateria"/-->   
            
     </session-factory>
