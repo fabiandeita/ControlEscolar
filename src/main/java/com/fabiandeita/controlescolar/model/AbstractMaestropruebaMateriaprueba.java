@@ -45,4 +45,6 @@ public abstract class AbstractMaestropruebaMateriaprueba implements java.io.Seri
 		this.id = id;
 	}
 
+        
+        
 }

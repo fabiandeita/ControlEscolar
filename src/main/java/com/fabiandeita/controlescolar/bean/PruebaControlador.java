@@ -44,6 +44,7 @@ public class PruebaControlador {
     private List       listaMateria;
     
     private List       listaMateriaJoinMaestros;
+    private List       nuevaListaMateriaMaestro;
     
     private Alumno     alumno;
     private Alumno     alumnoTemp;
@@ -175,24 +176,32 @@ public class PruebaControlador {
     
     public void fillListaMateria(){
         listaMateria = materiaDao.consultaMateria();
+
+        for (Materia matMaestro : (List<Materia>)listaMateria) {
+            System.out.println("  " + matMaestro.getNombre() );
+            
+            for (Maestro maestro1 : (List<Maestro>)matMaestro.getMaestros()) {
+                System.out.println(" " + maestro1.getNombre() + " " + maestro1.getApellidoM() );
+            }            
+        }
     }
     
     public void fillListaMateriaJoinMaestros(){
         listaMateriaJoinMaestros = materiaDao.consultaMateriaJoinMaestros();
-//        
-//        MaestropruebaMateriaprueba m = new MaestropruebaMateriaprueba();
-//        m.getId().getMaestrosMaestroId();
-//        m.getId().getMaestrosMaestroId();
-
-
-        System.out.println(" ");
-        System.out.println(" Pruebas");
         System.out.println(" ");
         for (MaestropruebaMateriaprueba listaMateriaMaestros : (List<MaestropruebaMateriaprueba>)listaMateriaJoinMaestros) {
-            System.out.println("hola " + listaMateriaMaestros.getId().getMaestrosMaestroId() + "  "+listaMateriaMaestros.getId().getMateriasMateriaId());
-            System.out.println(" " );
+            System.out.println("Registro " + listaMateriaMaestros.getId().getMaestrosMaestroId() + "  "+listaMateriaMaestros.getId().getMateriasMateriaId());
         }
-
+        
+        
+    }
+    
+    public void fillConsultaMateriaIdMaestros(){
+        nuevaListaMateriaMaestro = materiaDao.consultaMateriaIdMaestros();
+        System.out.println(" " );
+        for (Object object : nuevaListaMateriaMaestro) {
+            System.out.println(" " + object.toString() );
+        }
     }
     
     public Maestro getMaestroTemp() {
@@ -278,6 +287,14 @@ public class PruebaControlador {
         materia.addMaestro(maestroTemp);
         materiaDao.addMateria(materia);
         
+    }
+
+    public List getNuevaListaMateriaMaestro() {
+        return nuevaListaMateriaMaestro;
+    }
+
+    public void setNuevaListaMateriaMaestro(List nuevaListaMateriaMaestro) {
+        this.nuevaListaMateriaMaestro = nuevaListaMateriaMaestro;
     }
     
     public void saveMaestroMateria(ActionEvent event){

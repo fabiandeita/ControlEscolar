@@ -54,8 +54,36 @@ public class MateriaDao {
                return session.createQuery("from MaestropruebaMateriaprueba ").list(); 
     }
     
+    public List consultaMateriaIdMaestros(){
+               Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+               session.beginTransaction();
+               
+               
+               return session.createQuery(
+                "SELECT mat.materiaId, mat.nombre, mae.maestroId " +
+"		 from Materia as mat, " +
+"                Maestro as mae,  " +
+"                MaestropruebaMateriaprueba as maemat " +
+"                WHERE "
+                        + 
+                        "maemat.maestrosMaestroId "
+                        + 
+                        "= :mae.maestroId " +
+"                AND maemat.materiasMateriaId = :mat.materiaId"
+                 ).list(); 
+    }
+    
+    /*
+    String queryString = "from MaestropruebaMateriaprueba as model where model." + propertyName + "   = ?";
+    Query queryObject = getSession().createQuery(queryString);
+			
+    queryObject.setParameter(0, value);
+			
+    */
+    
+    
 /*
-SELECT DISTINCT mat.materia_id, mat.nombre, mae.maestro_id 
+SELECT DISTINCT mat.materia_id, mat.nombre, mae.maestro_id   materiasMateriaId
 				from materiaprueba as mat, 
                 maestroprueba as mae, 
                 maestroprueba_materiaprueba as maemat 

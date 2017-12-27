@@ -208,9 +208,10 @@
 <ace:accordionPane id="materia" title="Materia" rendered="true">
     <!--h1>Hello Materia!!</h1-->
 
-    <!-- " ac-->   
-    <ace:linkButton id="cargarMaatearia" value="Clic Materia (cargar) " action="#{pruebaComponent.cargarMaterias()}" style="color: green"/><br/><br/>                      
-    <ace:linkButton id="pruebaMateria2" value="Clic Materia prueba (Muchos-muchos) " action="#{pruebaComponent.pruebaMateria}" style="color: green"/><br/><br/>                      
+    <!-- nuevaListaMateriaMaestro -->      
+    <ace:linkButton id="cargarMaatearia" value="Clic Materia (cargar) " action="#{pruebaComponent.cargarMaterias()}" style="color: green"/><br/><br/>       
+        <!-- Se uso este Link para cargar la tabla terciaria -->
+    <!--ace:linkButton id="pruebaMateria2" value="Clic Materia prueba (Muchos-muchos) " action="#{pruebaComponent.pruebaMateria}" style="color: green"/><br/><br/-->                      
 
     <ace:tabSet id="tabsetMateria" clientSide="false" rendered="true">
         <ace:tabPane id="agregarMateria" label="AgregarMateria" rendered="true" > <!-- Inicializa agregar -->      
@@ -289,11 +290,11 @@
 <!-- ***************************************************************************************************************************** -->
 
     <ace:tabPane id="cambiosInnerMateria" label="CambiosInnerJoinMateria" rendered="true"> <!-- Inicalizan cambios Inner Join-->
-        <ace:linkButton id="InnerMateria" value="Clic Materia (listar) " action="#{pruebaComponent.fillListaMateriaJoinMaestros}" style="color: green"/><br/><br/>                                  
+        <ace:linkButton id="InnerMateria" value="Clic Materia (listar) " action="#{pruebaComponent.fillListaMateria}" style="color: green"/><br/><br/>                                  
             
             <ace:panel id="panelInnerMateria">               
                 <ace:dataTable id="controlInnerTableMateria"
-                               value="#{pruebaComponent.listaMateriaJoinMaestros}"
+                               value="#{pruebaComponent.listaMateria}"
                                var="_materia"
                                paginator="true"
                                paginatorPosition="bottom"
@@ -309,8 +310,11 @@
                     <!-- Aun no se ha agregado materia, faltante Id materia, entre otras cosas -->
                     <ace:column id="materiaMaestroIdInner" headerText="Id maestro" sortBy="" filterBy="" filterMatchMode="contains">
                         <!-- Ya no existe maestro maestroId -->
+                        <!-- Incluir el nombre del maestro          Materia.get                          -->
                         <!-- Incluir el nombre del maestro  -->
-                        <h:inputText id="idMaestroOutmateria" value="#{_materia.maestro_id}" />
+                        
+                        <h:inputText id="idMaestroOutmateria" value="#{ _materia.maestros  }" />
+                        
                     </ace:column>
 
                     <ace:column id="accionesMateriaInner" headerText="ACCIONES" sortBy="" filterBy="" filterMatchMode="contains">     
