@@ -52,6 +52,13 @@ public class MaestroDao {
         return session.createQuery(" from Maestro").list();
     }
     
+    /*
+    	String queryString = "from MaestropruebaMateriaprueba";
+        Query queryObject = getSession().createQuery(queryString);
+        return queryObject.list();
+    */
+    
+    
     private synchronized void init(){ 
 //        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //        session.beginTransaction();

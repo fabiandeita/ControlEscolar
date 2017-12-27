@@ -9,6 +9,7 @@ import com.fabiandeita.controlescolar.dao.MaestroDao;
 import com.fabiandeita.controlescolar.dao.MateriaDao;
 import com.fabiandeita.controlescolar.model.Alumno;
 import com.fabiandeita.controlescolar.model.Maestro;
+import com.fabiandeita.controlescolar.model.MaestropruebaMateriaprueba;
 import com.fabiandeita.controlescolar.model.Materia;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,12 +42,15 @@ public class PruebaControlador {
     private List       listaAlumnos;
     private List       listaMaestros;
     private List       listaMateria;
+    
     private List       listaMateriaJoinMaestros;
+    
     private Alumno     alumno;
     private Alumno     alumnoTemp;
     private Maestro    maestro;
     private Maestro    maestroTemp;
     private Materia    materia;
+    
     
     private Materia    materiaTemp;
     
@@ -175,6 +179,20 @@ public class PruebaControlador {
     
     public void fillListaMateriaJoinMaestros(){
         listaMateriaJoinMaestros = materiaDao.consultaMateriaJoinMaestros();
+//        
+//        MaestropruebaMateriaprueba m = new MaestropruebaMateriaprueba();
+//        m.getId().getMaestrosMaestroId();
+//        m.getId().getMaestrosMaestroId();
+
+
+        System.out.println(" ");
+        System.out.println(" Pruebas");
+        System.out.println(" ");
+        for (MaestropruebaMateriaprueba listaMateriaMaestros : (List<MaestropruebaMateriaprueba>)listaMateriaJoinMaestros) {
+            System.out.println("hola " + listaMateriaMaestros.getId().getMaestrosMaestroId() + "  "+listaMateriaMaestros.getId().getMateriasMateriaId());
+            System.out.println(" " );
+        }
+
     }
     
     public Maestro getMaestroTemp() {

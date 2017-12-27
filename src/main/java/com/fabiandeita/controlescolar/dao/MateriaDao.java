@@ -51,16 +51,10 @@ public class MateriaDao {
     public List consultaMateriaJoinMaestros(){
                Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                session.beginTransaction();
-               return session.createQuery("SELECT DISTINCT mat.materia_id, mat.nombre, mae.maestro_id " +
-                                           " FROM Materia as mat, " +
-                                           " Maestro as mae, " +
-                                           " MaestropruebaMateriaprueba as maemat " +
-                                           "WHERE maemat.maestros_maestro_id = mae.maestro_id "+
-                                           " AND maemat.materias_materia_id = mat.materia_id ").list(); 
+               return session.createQuery("from MaestropruebaMateriaprueba ").list(); 
     }
     
-    /*
-    
+/*
 SELECT DISTINCT mat.materia_id, mat.nombre, mae.maestro_id 
 				from materiaprueba as mat, 
                 maestroprueba as mae, 
@@ -68,6 +62,6 @@ SELECT DISTINCT mat.materia_id, mat.nombre, mae.maestro_id
                 WHERE maemat.maestros_maestro_id = mae.maestro_id 
                 AND maemat.materias_materia_id = mat.materia_id
 ;
-    */
+*/
     
 }
