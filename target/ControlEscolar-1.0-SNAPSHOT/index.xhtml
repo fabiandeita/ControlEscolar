@@ -160,10 +160,11 @@
 
         </ace:tabPane> <!-- finalizan agregar Maestros -->
 
-
+<!-- ********************************************************************************************************************************************************  -->
+<!-- ********************************************************************************************************************************************************  -->
         <ace:tabPane id="cambiosMaestro" label="CambiosMaestro" > <!-- Inicalizan cambios Maestro -->
             <ace:linkButton id="link2Maestro" value="Clic Maestro (listar) " action="#{pruebaComponent.fillListaMaestros}" style="color: green"/><br/><br/>                      
-            <ace:linkButton id="fillListaMateriaJoinMaestros" value="Clic fillListaMateriaJoinMaestros (listar) " action="#{pruebaComponent.fillListaMateriaJoinMaestros}" style="color: green"/><br/><br/>                      
+            <!--ace:linkButton id="fillListaMateriaJoinMaestros" value="Clic fillListaMateriaJoinMaestros (listar) " action="#{pruebaComponent.fillListaMateriaJoinMaestros}" style="color: green"/><br/><br/-->                      
             <ace:panel id="panelMaestro">
 
                 <ace:dataTable id="controlTableMaestro"
@@ -196,13 +197,53 @@
                         <h:commandButton value="Actual" image="resources/images/update3.png"  style="color: blue;" actionListener="#{pruebaComponent.updateMaestro}" class="button">
                             <f:attribute name="maestro" value="#{_maestro}" />
                         </h:commandButton>
+                        
+                        <h:commandButton value="Listar"   style="color: red;" actionListener="#{pruebaComponent.fillListaMateriaDeMaestros}" class="button">
+                            <f:attribute name="maestro" value="#{_maestro}" />
+                        </h:commandButton>
                     </ace:column>
                 </ace:dataTable>
             </ace:panel>                 
         </ace:tabPane><!-- Finalizan cambios -->   <!-- -->
+<!-- ********************************************************************************************************************************************************  -->
+<!-- ********************************************           Lista de Materias por Maestro          **********************************************************  -->
+<!-- ********************************************************************************************************************************************************  -->
+        <ace:tabPane id="listaMMaestroDe" label="Lista de Materias por Maestro" > <!-- Inicalizan cambios Maestro -->
+            
+            <ace:panel id="panelMaterisDeMaestro">
 
+                <ace:dataTable id="listaTableMateriasDeMaestro"
+                               value="#{pruebaComponent.listaMateriaMaestros}"
+                               var="_maestro"
+                               paginator="true"
+                               paginatorPosition="bottom"
+                               rows="10">
+
+                    <ace:column id="maestroId" headerText="ID" sortBy="" filterBy="" filterMatchMode="contains">
+                        <h:outputText id="idOut" value="#{_maestro.materiaId}"/>
+                    </ace:column>
+
+                    <ace:column id="nombremaestro" headerText="NOMBRE" sortBy="" filterBy="" filterMatchMode="contains">
+                        <h:inputText id="nombreOutmaestro" value="#{_maestro.nombre}"/>
+                    </ace:column>
+
+                    <ace:column id="accionesMaestro" headerText="ACCIONES" sortBy="" filterBy="" filterMatchMode="contains">     
+                        <h:commandButton value="Borrar" image="resources/images/delete2.png" style="color: red;" actionListener="#{pruebaComponent.deleteMaestro}"  class="button ">
+                            <f:attribute name="maestro" value="#{_maestro}" />
+                        </h:commandButton>
+                        <h:commandButton value="Actual" image="resources/images/update3.png"  style="color: blue;" actionListener="#{pruebaComponent.updateMaestro}" class="button">
+                            <f:attribute name="maestro" value="#{_maestro}" />
+                        </h:commandButton>
+                    </ace:column>
+                </ace:dataTable>
+            </ace:panel>                 
+        </ace:tabPane><!-- Finalizan cambios -->   <!-- -->
+<!-- ********************************************************************************************************************************************************  -->
+<!-- ********************************************************************************************************************************************************  -->
     </ace:tabSet> <!-- Finaliza el TabSet -->     
 </ace:accordionPane> <!-- Finaliza acordion Maestros -->
+
+
 
 <!-- Inicia Materia -->
 <ace:accordionPane id="materia" title="Materia" rendered="true">
@@ -217,18 +258,8 @@
         <ace:tabPane id="agregarMateria" label="AgregarMateria" rendered="true" > <!-- Inicializa agregar -->      
             <ace:panel id="InfoInputPanelMateria" header=" Info Materia" styleClass="required-styling-demo">
                 <h:panelGrid id="inputGridMateria" columns="1" width="100%" styleClass="textEntryInputTable">
-                    <!--ace:textEntry id="NameInputMateria" value="#{pruebaComponent.materiaTemp.nombre}" label="Nombre" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right"/-->
-                    <!--  null  -->
-                    <!--ace:textEntry id="InputMateriaMaestroId" value="#{pruebaComponent.materiaTemp.maestro.maestroId}"  label="Maestro Id" labelPosition="left" required="false" requiredIndicator="(*)" indicatorPosition="right"/-->
 
-                <!-- Combo Maestros         -->    
-                <!-- Combo Maestros -->    
-                    <!--h:outputLabel for="maestroId" value="Selecciona un Maestro" rendered="true" /-->
-                    <!--ace:selectMenu id="maestroId"  valueChangeListener="#{pruebaComponent.estableceMaestro}" rendered="true" >
-                        <f:selectItem itemLabel="Selecciona la Maestro" itemValue="" />  
-                        <f:selectItems value="#{pruebaComponent.listaMaestross}" />        
-                    </ace:selectMenu--><br/>
-
+                    
                 <!-- Combo materia se despliegan una lista en la que se puede seleccionar la materia -->
                 <!-- Combo materia -->
                     <h:outputLabel for="materiaId" value="Selecciona una Materia"/>
@@ -280,16 +311,64 @@
                         <h:commandButton value="Actual" image="resources/images/update3.png"  style="color: blue;" actionListener="#{pruebaComponent.updateMateria}" class="button">
                             <f:attribute name="materia" value="#{_materia}" />
                         </h:commandButton>
+                        
+                        <h:commandButton value="listar"   style="color: #FB7E29;" actionListener="#{pruebaComponent.fillListaMaestrosDeMateria}" class="button">
+                            <f:attribute name="materia" value="#{_materia}" />
+                        </h:commandButton>
                     </ace:column>
                 </ace:dataTable>
             </ace:panel>                 
         </ace:tabPane><!-- Finalizan cambios -->   <!-- -->
 
 <!-- ***************************************************************************************************************************** -->
+<!-- ***********                    Lista de Maestros relacionado con la materia                         ************************* -->
+<!-- ***************************************************************************************************************************** -->
+
+    <ace:tabPane id="cIMateria" label="Maestros de Materia" rendered="true"> <!--  -->                                  
+            
+            <ace:panel id="pIMateria">               
+                <ace:dataTable id="cITMateria"
+                               value="#{pruebaComponent.listaMaestrosMateria}"
+                               var="_maestro"
+                               paginator="true"
+                               paginatorPosition="bottom"
+                               rows="10">
+                    <ace:column id="materiaIdInner" headerText="ID" sortBy="" filterBy="" filterMatchMode="contains">
+                        <h:outputText id="idOut" value="#{_maestro.maestroId}"/>
+                    </ace:column>
+                    <ace:column id="nombremateriaI" headerText="NOMBRE" sortBy="" filterBy="" filterMatchMode="contains">
+                        <h:inputText id="nombreOutmateriaInner" value="#{_maestro.nombre}"/>
+                    </ace:column>
+
+                    <!--   -->
+                    <ace:column id="apPaternoMaestro" headerText="apPaterno " sortBy="" filterBy="" filterMatchMode="contains">
+                        <!-- -->
+                        <h:inputText id="apellidoMaestroPaterno" value="#{_maestro.apellidoP  }" />
+                    </ace:column>
+                    <ace:column id="apMaternoMaestro" headerText="apMaterno " sortBy="" filterBy="" filterMatchMode="contains">
+                        <!--  -->
+                        <h:inputText id="idMaestroOutmateria" value="#{_maestro.apellidoM  }" />
+                    </ace:column>
+
+                                        
+                    <ace:column id="accionesMaestroI" headerText="ACCIONES" sortBy="" filterBy="" filterMatchMode="contains">     
+                        <h:commandButton value="Borrar" image="resources/images/delete2.png" style="color: red;" actionListener="#{pruebaComponent.deleteMaestro}"  class="button ">
+                            <f:attribute name="materia" value="#{_maestro}" />
+                        </h:commandButton>
+                        <h:commandButton value="Actual" image="resources/images/update3.png"  style="color: blue;" actionListener="#{pruebaComponent.updateMaestro}" class="button">
+                            <f:attribute name="materia" value="#{_maestro}" />
+                        </h:commandButton>
+                    </ace:column>
+                </ace:dataTable>
+            </ace:panel>                 
+        </ace:tabPane><!-- Finalizan cambios -->   <!-- -->
+
+
+<!-- ***************************************************************************************************************************** -->
 <!-- ***********                                 Lista Inner Joint                                       ************************* -->
 <!-- ***************************************************************************************************************************** -->
 
-    <ace:tabPane id="cambiosInnerMateria" label="CambiosInnerJoinMateria" rendered="true"> <!-- Inicalizan cambios Inner Join-->
+    <ace:tabPane id="cambiosInnerMateria" label="CambiosInnerJoinMateria" rendered="false"> <!-- Inicalizan cambios Inner Join-->
         <ace:linkButton id="InnerMateria" value="Clic Materia (listar) " action="#{pruebaComponent.fillListaMateria}" style="color: green"/><br/><br/>                                  
             
             <ace:panel id="panelInnerMateria">               
@@ -310,8 +389,6 @@
                     <!-- Aun no se ha agregado materia, faltante Id materia, entre otras cosas -->
                     <ace:column id="materiaMaestroIdInner" headerText="Id maestro" sortBy="" filterBy="" filterMatchMode="contains">
                         <!-- Ya no existe maestro maestroId -->
-                        <!-- Incluir el nombre del maestro          Materia.get                          -->
-                        <!-- Incluir el nombre del maestro  -->
                         
                         <h:inputText id="idMaestroOutmateria" value="#{ _materia.maestros  }" />
                         

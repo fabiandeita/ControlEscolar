@@ -42,6 +42,9 @@ public class PruebaControlador {
     private List       listaAlumnos;
     private List       listaMaestros;
     private List       listaMateria;
+    //lista en relacion de los maestros que imparten la materia
+    private List       listaMaestrosMateria;
+    private List       listaMateriaMaestros;
     
     private List       listaMateriaJoinMaestros;
     private List       nuevaListaMateriaMaestro;
@@ -163,8 +166,37 @@ public class PruebaControlador {
     public void deleteMateria(ActionEvent event){
         Materia materia = (Materia)event.getComponent().getAttributes().get("materia");
         materiaDao.deleteMateria(materia); 
+//        materia.getMaestros();
         fillListaMateria();
     }
+    
+    public void fillListaMaestrosDeMateria(ActionEvent event){
+        Materia materia = (Materia)event.getComponent().getAttributes().get("materia");    
+        listaMaestrosMateria = materia.getMaestros();
+    }
+    
+    
+    
+    
+    public void fillListaMateriaDeMaestros(ActionEvent event){
+        Maestro maestro = (Maestro)event.getComponent().getAttributes().get("maestro");    
+        listaMateriaMaestros = maestro.getMaterias();
+    }
+
+    public List getListaMateriaMaestros() {
+        return listaMateriaMaestros;
+    }
+    public void setListaMateriaMaestros(List listaMateriaMaestros) {
+        this.listaMateriaMaestros = listaMateriaMaestros;
+    }
+    
+    public List getListaMaestrosMateria() {
+        return listaMaestrosMateria;
+    }
+    public void setListaMaestrosMateria(List listaMaestrosMateria) {
+        this.listaMaestrosMateria = listaMaestrosMateria;
+    }
+    
     
     public void fillListaAlumnos(){
         listaAlumnos = alumnoDao.consultaAlumno();
