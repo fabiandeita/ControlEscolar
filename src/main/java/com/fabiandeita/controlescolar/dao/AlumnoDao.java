@@ -26,7 +26,7 @@ public class AlumnoDao {
     }
     
     public void updateAlumno(Alumno  alumno){
-                System.out.println("id: " + alumno.getEstudianteId());
+                System.out.println("id: " + alumno.getAlumnoId());
                 System.out.println("Nombre: " + alumno.getNombre());
                 System.out.println("apP: " + alumno.getApellidoP());
                 System.out.println("apM: "+  alumno.getApellidoM());

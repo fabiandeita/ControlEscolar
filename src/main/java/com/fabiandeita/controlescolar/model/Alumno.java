@@ -17,7 +17,7 @@ public class Alumno {
     @Id
     @Column(name="alumno_id")
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long estudianteId;
+    private long alumnoId;
     
     @Column(name="nombre")
     private String nombre;
@@ -41,7 +41,7 @@ public class Alumno {
 
     public Alumno(long id)
     {
-        this.estudianteId = id;
+        this.alumnoId = id;
     }
 
     public Alumno(String nombre, String apellidoP, String apellidoM) {
@@ -50,8 +50,8 @@ public class Alumno {
         this.apellidoM = apellidoM;
     }
 
-    public Alumno(long estudianteId, String nombre, String apellidoP, String apellidoM) {
-        this.estudianteId = estudianteId;
+    public Alumno(long alumnoId, String nombre, String apellidoP, String apellidoM) {
+        this.alumnoId = alumnoId;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -76,17 +76,17 @@ public class Alumno {
     }
 
     /**
-     * @return the estudianteId
+     * @return the alumnoId
      */
-    public long getEstudianteId() {
-        return estudianteId;
+    public long getAlumnoId() {
+        return alumnoId;
     }
 
     /**
-     * @param estudianteId the estudianteId to set
+     * @param alumno the alumno to set
      */
-    public void setEstudianteId(long estudianteId) {
-        this.estudianteId = estudianteId;
+    public void setAlumnoId(long alumnoId) {
+        this.alumnoId = alumnoId;
     }
 
     /**
