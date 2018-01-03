@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.fabiandeita.controlescolar.bean.PruebaControlador.class);
+        resources.add(com.fabiandeita.controlescolar.bean.controladorGet.class);
     }
     
 }

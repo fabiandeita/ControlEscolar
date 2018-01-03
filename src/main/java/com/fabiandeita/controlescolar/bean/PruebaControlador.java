@@ -70,9 +70,7 @@ public class PruebaControlador {
     @GET
     public String pruebaOperacion(@QueryParam("numero") int numero){
         System.out.println("numero: " + numero);
-        System.out.println("numero: " + numero);
-        System.out.println("numero: " + numero);
-        System.out.println("numero: " + numero);
+        System.out.println("numero:Integer.toString(numero) " + numero);
         return Integer.toString(numero) ;
     }
     
