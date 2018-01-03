@@ -18,10 +18,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.faces.event.ActionEvent;
 import java.util.List;
-//import java.util.Set;
-
+import javax.ejb.Stateless;
+    
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -32,6 +35,8 @@ import org.hibernate.Session;
  * @author Emma
  * 
  */
+@Stateless
+@Path("/pruebaOperacion")
 public class PruebaControlador {
    
     private AlumnoDao  alumnoDao;
@@ -53,8 +58,7 @@ public class PruebaControlador {
     private Alumno     alumnoTemp;
     private Maestro    maestro;
     private Maestro    maestroTemp;
-    private Materia    materia;
-    
+    private Materia    materia;    
     
     private Materia    materiaTemp;
     
@@ -62,6 +66,16 @@ public class PruebaControlador {
     private List<SelectItem> listaMaterias;
     
     //private List<SelectItem> listaMaestross;
+
+    @GET
+    public String pruebaOperacion(@QueryParam("numero") int numero){
+        System.out.println("numero: " + numero);
+        System.out.println("numero: " + numero);
+        System.out.println("numero: " + numero);
+        System.out.println("numero: " + numero);
+        return Integer.toString(numero) ;
+    }
+    
 
     
     public PruebaControlador(){   
@@ -71,10 +85,8 @@ public class PruebaControlador {
         alumnoTemp  = new Alumno();
         maestroTemp = new Maestro();
         materiaTemp = new Materia();
-        
         // Checar
         //materiaTemp.setMaestro(new  Maestro());
-        
 //        cargarMaterias();
 //        cargarMaestros();
     }
